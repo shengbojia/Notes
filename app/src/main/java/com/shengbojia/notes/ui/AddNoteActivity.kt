@@ -30,7 +30,7 @@ class AddNoteActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_add, menu)
         return true
     }
 
@@ -68,10 +68,6 @@ class AddNoteActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_TITLE = "com.shengbojia.notes.ui.EXTRA_TITLE"
-        const val EXTRA_DESCRIPTION = "com.shengbojia.notes.ui.EXTRA_DESCRIPTION"
-        const val EXTRA_PRIORITY = "com.shengbojia.notes.ui.EXTRA_PRIORITY"
-
         private const val TAG = "ActAddNote"
     }
 }
