@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.AddNoteActivity">
+
+    <android.support.design.widget.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_add"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+            android:layout_marginTop="?attr/actionBarSize"
+            android:padding="@dimen/padding_addScreen"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+        <EditText
+                android:id="@+id/et_add_title"
+                android:padding="@dimen/padding_addScreen"
+                android:inputType="text"
+                android:hint="@string/all_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        
+        <EditText
+                android:id="@+id/et_add_desc"
+                android:padding="@dimen/padding_addScreen"
+                android:hint="@string/all_description"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:text="@string/all_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        
+        <NumberPicker
+                android:id="@+id/numpicker_add_priority"
+                android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"></NumberPicker>
+        
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

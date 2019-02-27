@@ -8,12 +8,7 @@ import com.shengbojia.notes.data.NoteRepository
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = NoteRepository(application)
-    private val allNotes = repository.getAllNotes()
-
-    fun insert(note: Note) {
-        repository.insert(note)
-    }
+    private val repository = NoteRepository.getInstance(application)
 
     fun update(note: Note) {
         repository.update(note)
@@ -28,6 +23,6 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getAllNotes(): LiveData<List<Note>> {
-        return allNotes
+        return repository.getAllNotes()
     }
 }

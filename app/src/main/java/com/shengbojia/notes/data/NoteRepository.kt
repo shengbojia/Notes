@@ -2,11 +2,11 @@ package com.shengbojia.notes.data
 
 import android.app.Application
 import android.arch.lifecycle.LiveData
+import android.content.Context
 import android.os.AsyncTask
 
-class NoteRepository(application: Application) {
-    private val noteDao = NoteDatabase.getInstance(application).noteDao()
-    private val allNotes = noteDao.getAllNotes()
+class NoteRepository private constructor(application: Application){
+    private var noteDao: NoteDao = NoteDatabase.getInstance(application).noteDao()
 
     fun insert(note: Note) {
         InsertNoteAsyncTask(noteDao).execute(note)
@@ -25,7 +25,17 @@ class NoteRepository(application: Application) {
     }
 
     fun getAllNotes(): LiveData<List<Note>> {
-        return allNotes
+        return noteDao.getAllNotes()
+    }
+
+    companion object {
+        @Volatile
+        private var INSTANCE: NoteRepository? = null
+
+        fun getInstance(application: Application): NoteRepository =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: NoteRepository(application).also { INSTANCE = it }
+            }
     }
 
     private class InsertNoteAsyncTask internal constructor(

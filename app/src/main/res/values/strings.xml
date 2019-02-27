@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Notes</string>
     <string name="action_settings">Settings</string>
+    <string name="all_title">Title</string>
+    <string name="all_description">Description</string>
+    <string name="all_priority">Priority</string>
 </resources>

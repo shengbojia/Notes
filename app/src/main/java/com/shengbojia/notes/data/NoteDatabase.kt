@@ -27,10 +27,10 @@ abstract class NoteDatabase : RoomDatabase() {
                     context.applicationContext,
                     NoteDatabase::class.java,
                     "note_database"
-                ).addCallback(roomCallBack).build()
+                ).addCallback(RoomCallBack).build()
     }
 
-    private object roomCallBack : RoomDatabase.Callback() {
+    private object RoomCallBack : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
 
@@ -45,18 +45,16 @@ abstract class NoteDatabase : RoomDatabase() {
         override fun doInBackground(vararg params: Unit?) {
             noteDao.insert(
                 Note(
-                    1,
-                    "Capture what's on your mind, on the go",
-                    "description 1",
-                    1
+                    title = "Capture what's on your mind, on the go",
+                    description = "description 1",
+                    priority = 1
                 )
             )
             noteDao.insert(
                 Note(
-                    2,
-                    "Test title 2",
-                    "description 2",
-                    2
+                    title = "Test title 2",
+                    description = "description 2",
+                    priority = 2
                 )
             )
         }
