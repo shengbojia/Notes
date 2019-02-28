@@ -1,4 +1,4 @@
-package com.shengbojia.notes.ui
+package com.shengbojia.notes.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,9 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.shengbojia.notes.MainActivity
 import com.shengbojia.notes.R
 import com.shengbojia.notes.data.Note
+import com.shengbojia.notes.ui.AddEditNoteActivity
 import kotlinx.android.synthetic.main.item_notes.view.*
 
 class NoteAdapter internal constructor(
@@ -47,6 +47,8 @@ class NoteAdapter internal constructor(
         init {
             itemView.setOnClickListener(this)
         }
+
+        // TODO:  Also make a onLongClick, with invisible checkbox that comes up and allows for deletion
 
         override fun onClick(v: View?) {
 

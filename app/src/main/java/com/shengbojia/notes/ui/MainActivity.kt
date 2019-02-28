@@ -1,4 +1,4 @@
-package com.shengbojia.notes
+package com.shengbojia.notes.ui
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -9,8 +9,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.shengbojia.notes.ui.AddEditNoteActivity
-import com.shengbojia.notes.ui.NoteAdapter
+import com.shengbojia.notes.R
+import com.shengbojia.notes.adapter.NoteAdapter
 import com.shengbojia.notes.viewmodel.NoteViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,10 +38,9 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             onFabClick(it)
         }
-
-
     }
 
+    // TODO: Add a delete all feature, and make it pop up a confirmation dialog
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)

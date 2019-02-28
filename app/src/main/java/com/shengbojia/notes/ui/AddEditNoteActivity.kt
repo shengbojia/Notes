@@ -10,10 +10,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.shengbojia.notes.R
 import com.shengbojia.notes.data.Note
-import com.shengbojia.notes.ui.NoteAdapter.Companion.EXTRA_DESC
-import com.shengbojia.notes.ui.NoteAdapter.Companion.EXTRA_ID
-import com.shengbojia.notes.ui.NoteAdapter.Companion.EXTRA_PRIORITY
-import com.shengbojia.notes.ui.NoteAdapter.Companion.EXTRA_TITLE
+import com.shengbojia.notes.adapter.NoteAdapter.Companion.EXTRA_DESC
+import com.shengbojia.notes.adapter.NoteAdapter.Companion.EXTRA_ID
+import com.shengbojia.notes.adapter.NoteAdapter.Companion.EXTRA_PRIORITY
+import com.shengbojia.notes.adapter.NoteAdapter.Companion.EXTRA_TITLE
 import com.shengbojia.notes.viewmodel.AddEditNoteViewModel
 import kotlinx.android.synthetic.main.activity_add_note.*
 
