@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.AddNoteActivity"
+        <activity android:name=".ui.AddEditNoteActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                              android:parentActivityName=".MainActivity">
     </activity>

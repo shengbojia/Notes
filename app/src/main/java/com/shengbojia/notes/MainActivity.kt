@@ -1,18 +1,15 @@
 package com.shengbojia.notes
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.shengbojia.notes.ui.AddNoteActivity
+import com.shengbojia.notes.ui.AddEditNoteActivity
 import com.shengbojia.notes.ui.NoteAdapter
 import com.shengbojia.notes.viewmodel.NoteViewModel
 
@@ -41,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             onFabClick(it)
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onFabClick(view: View) {
-        val addIntent = Intent(this, AddNoteActivity::class.java)
+        val addIntent = Intent(this, AddEditNoteActivity::class.java)
         startActivity(addIntent)
     }
 
@@ -72,9 +71,9 @@ class MainActivity : AppCompatActivity() {
             && resultCode == Activity.RESULT_OK
             && data != null
         ) {
-            val title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE)
-            val desc = data.getStringExtra(AddNoteActivity.EXTRA_DESCRIPTION)
-            val priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 0)
+            val title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE)
+            val desc = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION)
+            val priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 0)
 
             Log.d(TAG, "$title, $desc, $priority")
         }

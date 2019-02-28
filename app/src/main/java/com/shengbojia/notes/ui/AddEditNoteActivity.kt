@@ -10,11 +10,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.shengbojia.notes.R
 import com.shengbojia.notes.data.Note
-import com.shengbojia.notes.viewmodel.AddNoteViewModel
+import com.shengbojia.notes.viewmodel.AddEditNoteViewModel
 import kotlinx.android.synthetic.main.activity_add_note.*
 
-class AddNoteActivity : AppCompatActivity() {
-    private lateinit var addNoteViewModel: AddNoteViewModel
+class AddEditNoteActivity : AppCompatActivity() {
+    private lateinit var addEditNoteViewModel: AddEditNoteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class AddNoteActivity : AppCompatActivity() {
         numpicker_add_priority.minValue = 1
         numpicker_add_priority.maxValue = 5
 
-        addNoteViewModel = ViewModelProviders.of(this).get(AddNoteViewModel::class.java)
+        addEditNoteViewModel = ViewModelProviders.of(this).get(AddEditNoteViewModel::class.java)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,7 +56,7 @@ class AddNoteActivity : AppCompatActivity() {
             return
         }
 
-        addNoteViewModel.insert(
+        addEditNoteViewModel.insert(
             Note(
                 title = title,
                 description = desc,

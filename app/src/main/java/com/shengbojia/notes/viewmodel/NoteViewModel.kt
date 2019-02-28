@@ -10,10 +10,6 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = NoteRepository.getInstance(application)
 
-    fun update(note: Note) {
-        repository.update(note)
-    }
-
     fun delete(note: Note) {
         repository.delete(note)
     }

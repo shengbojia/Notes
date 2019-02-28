@@ -40,8 +40,8 @@ class NoteAdapter internal constructor(
         internal val titleTv = itemView.tv_note_title
         internal val descriptionTv = itemView.tv_note_desc
         internal val priorityTv = itemView.tv_note_priority
+
+
     }
-
-
 
 }
