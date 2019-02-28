@@ -21,6 +21,8 @@ class AddEditNoteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_note)
         setSupportActionBar(toolbar_add)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        
         title = "Add note"
 
         numpicker_add_priority.minValue = 1
