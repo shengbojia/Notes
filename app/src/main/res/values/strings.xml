@@ -7,4 +7,8 @@
 
     <string name="addEdit_addNote">Add note</string>
     <string name="addEdit_editNote">Edit note</string>
+
+    <string name="toast_contentEmptyMessage">Please enter a title and a description</string>
+    <string name="toast_savedSuccess">Saved!</string>
+    <string name="toast_idError">An error has occurred, edit not saved.</string>
 </resources>

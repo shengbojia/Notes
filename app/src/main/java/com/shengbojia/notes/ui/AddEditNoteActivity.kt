@@ -68,20 +68,53 @@ class AddEditNoteActivity : AppCompatActivity() {
 
         Log.d(TAG, "$title, $desc, $priority")
 
-        if (title.isBlank() && desc.isBlank()) {
-            Toast.makeText(this, "Please enter a title and a description", Toast.LENGTH_SHORT).show()
+        if (title.isBlank() || desc.isBlank()) {
+            Toast
+                .makeText(this, getString(R.string.toast_contentEmptyMessage), Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
-        addEditNoteViewModel.insert(
-            Note(
-                title = title,
-                description = desc,
-                priority = priority
+        if (intent.hasExtra(EXTRA_ID)) {
+            val noteId = intent.getIntExtra(EXTRA_ID, -1)
+
+            if (noteId == -1) {
+                Toast
+                    .makeText(this, getString(R.string.toast_idError), Toast.LENGTH_SHORT)
+                    .show()
+                return
+
+            } else {
+                addEditNoteViewModel.update(
+                    Note(
+                        noteId,
+                        title,
+                        desc,
+                        priority
+                    )
+                )
+            }
+
+        } else {
+            addEditNoteViewModel.insert(
+                Note(
+                    title = title,
+                    description = desc,
+                    priority = priority
+                )
             )
-        )
-        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show()
+        }
+        Toast.makeText(this, getString(R.string.toast_savedSuccess), Toast.LENGTH_SHORT).show()
         NavUtils.navigateUpFromSameTask(this)
+    }
+
+    private fun saveEditedNote(
+        id: Int,
+        title: String,
+        desc: String,
+        priority: Int
+    ) {
+        addEditNoteViewModel.update(Note(id, title, desc, priority))
     }
 
     companion object {
