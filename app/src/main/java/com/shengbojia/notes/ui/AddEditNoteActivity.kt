@@ -10,6 +10,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.shengbojia.notes.R
 import com.shengbojia.notes.data.Note
+import com.shengbojia.notes.ui.NoteAdapter.Companion.EXTRA_DESC
+import com.shengbojia.notes.ui.NoteAdapter.Companion.EXTRA_ID
+import com.shengbojia.notes.ui.NoteAdapter.Companion.EXTRA_PRIORITY
+import com.shengbojia.notes.ui.NoteAdapter.Companion.EXTRA_TITLE
 import com.shengbojia.notes.viewmodel.AddEditNoteViewModel
 import kotlinx.android.synthetic.main.activity_add_note.*
 
@@ -22,11 +26,22 @@ class AddEditNoteActivity : AppCompatActivity() {
         setSupportActionBar(toolbar_add)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        
-        title = "Add note"
-
         numpicker_add_priority.minValue = 1
         numpicker_add_priority.maxValue = 5
+
+        if (intent.hasExtra(EXTRA_ID)) {
+
+            title = getString(R.string.addEdit_editNote)
+
+            intent.apply {
+                et_add_title.setText(getStringExtra(EXTRA_TITLE))
+                et_add_desc.setText(getStringExtra(EXTRA_DESC))
+                numpicker_add_priority.value = getIntExtra(EXTRA_PRIORITY, 1)
+            }
+
+        } else {
+            title = getString(R.string.addEdit_addNote)
+        }
 
         addEditNoteViewModel = ViewModelProviders.of(this).get(AddEditNoteViewModel::class.java)
     }

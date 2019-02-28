@@ -10,3 +10,5 @@ data class Note(
     var description: String,
     var priority: Int
 )
+
+// TODO: Change priority to date or something like that

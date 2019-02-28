@@ -49,24 +49,36 @@ class NoteAdapter internal constructor(
         }
 
         override fun onClick(v: View?) {
+
             Log.d(TAG, "onClick worked")
+
             if (adapterPosition != RecyclerView.NO_POSITION) {
+
                 Log.d(TAG, "at position: $adapterPosition")
+
                 val noteClicked = notes[adapterPosition]
-                startEditing(noteClicked)
+                startEditActivity(noteClicked)
             }
         }
 
-        private fun startEditing(note: Note) {
+        /**
+         * Creates and calls an intent from the context that is passed in adapter's constructor to a new add edit
+         * note activity.
+         */
+        private fun startEditActivity(note: Note) {
             val editIntent = Intent(context, AddEditNoteActivity::class.java)
+
+            editIntent.putExtra(EXTRA_ID, note.id)
             editIntent.putExtra(EXTRA_TITLE, note.title)
             editIntent.putExtra(EXTRA_DESC, note.description)
             editIntent.putExtra(EXTRA_PRIORITY, note.priority)
+
             context.startActivity(editIntent)
         }
     }
 
     companion object {
+        internal const val EXTRA_ID = "com.shengbojia.notes.ui.EXTRA_ID"
         internal const val EXTRA_TITLE = "com.shengbojia.notes.ui.EXTRA_TITLE"
         internal const val EXTRA_DESC = "com.shengbojia.notes.ui.EXTRA_DESC"
         internal const val EXTRA_PRIORITY = "com.shengbojia.notes.ui.EXTRA_PRIORITY"
