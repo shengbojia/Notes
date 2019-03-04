@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -52,9 +53,26 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_deleteAll -> {
+                dialogConfirmation()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun dialogConfirmation() {
+        val builder = AlertDialog.Builder(this, R.style.ConfirmationDialogStyle)
+        builder.apply {
+            setTitle(getString(R.string.dialog_confirmationTitle))
+            setPositiveButton(getString(R.string.dialog_positive)) { _, _ ->
+                noteViewModel.deleteAllNotes()
+            }
+            setNegativeButton(getString(R.string.dialog_cancel)) { _, _ ->
+            }
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun onFabClick(view: View) {
