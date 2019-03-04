@@ -80,25 +80,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(addIntent)
     }
 
-    /*
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == ADD_NOTE_REQ
-            && resultCode == Activity.RESULT_OK
-            && data != null
-        ) {
-            val title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE)
-            val desc = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION)
-            val priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 0)
-
-            Log.d(TAG, "$title, $desc, $priority")
-        }
-    }
-    */
     companion object {
-        const val ADD_NOTE_REQ = 1
-
         private const val TAG = "ActMain"
     }
 }
