@@ -1,7 +1,7 @@
 package com.shengbojia.notes.viewmodel
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.data.NoteRepository
 
