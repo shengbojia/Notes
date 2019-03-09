@@ -3,6 +3,10 @@ package com.shengbojia.notes.data
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 
+
+/**
+ * The Data Access Object for the [Note] class.
+ */
 @Dao
 interface NoteDao {
 

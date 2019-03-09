@@ -5,6 +5,9 @@ import android.arch.lifecycle.LiveData
 import android.content.Context
 import android.os.AsyncTask
 
+/**
+ * Repository for handling data operations.
+ */
 class NoteRepository private constructor(application: Application){
     private var noteDao: NoteDao = NoteDatabase.getInstance(application).noteDao()
 
@@ -28,6 +31,7 @@ class NoteRepository private constructor(application: Application){
         return noteDao.getAllNotes()
     }
 
+    // Singleton instantiation
     companion object {
         @Volatile
         private var INSTANCE: NoteRepository? = null
@@ -38,6 +42,7 @@ class NoteRepository private constructor(application: Application){
             }
     }
 
+    // TODO: Use Kotlin's co-routines instead of AsyncTask
     private class InsertNoteAsyncTask internal constructor(
         private val noteDao: NoteDao
     ) : AsyncTask<Note, Unit, Unit>() {

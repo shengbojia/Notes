@@ -10,12 +10,16 @@ import android.content.Context
 import android.os.AsyncTask
 import java.lang.IllegalStateException
 
+/**
+ * Room database for the app.
+ */
 @Database(entities = [Note::class], version = 2 )
 @TypeConverters(Converters::class)
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
 
+    // Singleton instantiation.
     companion object {
         @Volatile
         private var INSTANCE: NoteDatabase? = null
@@ -36,6 +40,7 @@ abstract class NoteDatabase : RoomDatabase() {
                     .build()
     }
 
+    // Pre-populate the database with some helpful notes
     private object RoomCallBack : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
@@ -45,12 +50,14 @@ abstract class NoteDatabase : RoomDatabase() {
         }
     }
 
+    // Added a new column, performed migration since I did not want to clear out the app's data on my phone
     private object Migration1To2 : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL("ALTER TABLE note_table ADD COLUMN date_written INTEGER")
         }
     }
 
+    // TODO: Use Kotlin's co-routines instead of AsyncTask
     private class PopulateDbAsyncClass constructor(db: NoteDatabase?) : AsyncTask<Unit, Unit, Unit>() {
         private var noteDao = db?.noteDao() ?: throw IllegalStateException("Database uninitialized")
 

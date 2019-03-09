@@ -12,6 +12,9 @@ import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.ui.AddEditNoteActivity
 import kotlinx.android.synthetic.main.item_notes.view.*
 
+/**
+ * Adapter for the [RecyclerView] in [MainActivity]
+ */
 class NoteAdapter internal constructor(
     private val context: Context
 ): RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
