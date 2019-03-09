@@ -104,6 +104,7 @@ class AddEditNoteActivity : AppCompatActivity() {
                 )
             )
         }
+
         Toast.makeText(this, getString(R.string.toast_savedSuccess), Toast.LENGTH_SHORT).show()
         NavUtils.navigateUpFromSameTask(this)
     }

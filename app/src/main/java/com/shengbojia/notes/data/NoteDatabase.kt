@@ -4,11 +4,14 @@ import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.TypeConverters
+import android.arch.persistence.room.migration.Migration
 import android.content.Context
 import android.os.AsyncTask
 import java.lang.IllegalStateException
 
-@Database(entities = [Note::class], version = 1 )
+@Database(entities = [Note::class], version = 2 )
+@TypeConverters(Converters::class)
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
@@ -27,7 +30,10 @@ abstract class NoteDatabase : RoomDatabase() {
                     context.applicationContext,
                     NoteDatabase::class.java,
                     "note_database"
-                ).addCallback(RoomCallBack).build()
+                )
+                    .addCallback(RoomCallBack)
+                    .addMigrations(Migration1To2)
+                    .build()
     }
 
     private object RoomCallBack : RoomDatabase.Callback() {
@@ -36,6 +42,12 @@ abstract class NoteDatabase : RoomDatabase() {
 
             // Null safe as call back is only added after instantiation of INSTANCE
             PopulateDbAsyncClass(INSTANCE).execute()
+        }
+    }
+
+    private object Migration1To2 : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE note_table ADD COLUMN date_written INTEGER")
         }
     }
 
