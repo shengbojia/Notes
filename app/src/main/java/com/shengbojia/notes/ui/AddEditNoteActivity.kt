@@ -108,15 +108,6 @@ class AddEditNoteActivity : AppCompatActivity() {
         NavUtils.navigateUpFromSameTask(this)
     }
 
-    private fun saveEditedNote(
-        id: Int,
-        title: String,
-        desc: String,
-        priority: Int
-    ) {
-        addEditNoteViewModel.update(Note(id, title, desc, priority))
-    }
-
     companion object {
         private const val TAG = "ActAddNote"
     }
