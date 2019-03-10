@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
  */
 class NoteRepository private constructor(
     private val noteDao: NoteDao
-){
+) {
 
     suspend fun insert(note: Note) {
         withContext(Dispatchers.IO) {
@@ -52,46 +52,4 @@ class NoteRepository private constructor(
             }
     }
 
-    /*
-    // TODO: Use Kotlin's co-routines instead of AsyncTask
-    private class InsertNoteAsyncTask internal constructor(
-        private val noteDao: NoteDao
-    ) : AsyncTask<Note, Unit, Unit>() {
-
-        override fun doInBackground(vararg params: Note) {
-            noteDao.insert(params[0])
-            return
-        }
-    }
-
-    private class UpdateNoteAsyncTask internal constructor(
-        private val noteDao: NoteDao
-    ): AsyncTask<Note, Unit, Unit>() {
-
-        override fun doInBackground(vararg params: Note) {
-            noteDao.update(params[0])
-            return
-        }
-    }
-
-    private class DeleteNoteAsyncTask internal constructor(
-        private val noteDao: NoteDao
-    ): AsyncTask<Note, Unit, Unit>() {
-
-        override fun doInBackground(vararg params: Note) {
-            noteDao.delete(params[0])
-            return
-        }
-    }
-
-    private class DeleteAllNoteAsyncTask internal constructor(
-        private val noteDao: NoteDao
-    ): AsyncTask<Unit, Unit, Unit>() {
-
-        override fun doInBackground(vararg units: Unit?) {
-            noteDao.deleteAllNotes()
-            return
-        }
-    }
-    */
 }
