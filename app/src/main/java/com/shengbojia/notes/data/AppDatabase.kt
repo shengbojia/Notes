@@ -1,11 +1,11 @@
 package com.shengbojia.notes.data
 
-import android.arch.persistence.db.SupportSQLiteDatabase
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverters
-import android.arch.persistence.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import androidx.room.migration.Migration
 import android.content.Context
 import android.os.AsyncTask
 import java.lang.IllegalStateException
@@ -15,24 +15,24 @@ import java.lang.IllegalStateException
  */
 @Database(entities = [Note::class], version = 2 )
 @TypeConverters(Converters::class)
-abstract class NoteDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
 
     // Singleton instantiation.
     companion object {
         @Volatile
-        private var INSTANCE: NoteDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): NoteDatabase =
+        fun getInstance(context: Context): AppDatabase =
                 INSTANCE ?: synchronized(this) {
                     INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
                 }
 
-        private fun buildDatabase(context: Context): NoteDatabase =
+        private fun buildDatabase(context: Context): AppDatabase =
                 Room.databaseBuilder(
                     context.applicationContext,
-                    NoteDatabase::class.java,
+                    AppDatabase::class.java,
                     "note_database"
                 )
                     .addCallback(RoomCallBack)
@@ -44,9 +44,6 @@ abstract class NoteDatabase : RoomDatabase() {
     private object RoomCallBack : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-
-            // Null safe as call back is only added after instantiation of INSTANCE
-            PopulateDbAsyncClass(INSTANCE).execute()
         }
     }
 
@@ -58,7 +55,7 @@ abstract class NoteDatabase : RoomDatabase() {
     }
 
     // TODO: Use Kotlin's co-routines instead of AsyncTask
-    private class PopulateDbAsyncClass constructor(db: NoteDatabase?) : AsyncTask<Unit, Unit, Unit>() {
+    private class PopulateDbAsyncClass constructor(db: AppDatabase?) : AsyncTask<Unit, Unit, Unit>() {
         private var noteDao = db?.noteDao() ?: throw IllegalStateException("Database uninitialized")
 
         override fun doInBackground(vararg params: Unit?) {

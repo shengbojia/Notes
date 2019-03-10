@@ -1,7 +1,7 @@
 package com.shengbojia.notes.data
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 
 /**
@@ -21,6 +21,9 @@ interface NoteDao {
 
     @Query("DELETE FROM note_table")
     fun deleteAllNotes()
+
+    @Query("SELECT * FROM note_table WHERE id = :noteId")
+    fun getNote(noteId: Int): LiveData<Note>
 
     @Query("SELECT * FROM note_table ORDER BY date_written DESC")
     fun getAllNotes(): LiveData<List<Note>>

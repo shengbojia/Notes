@@ -1,47 +1,58 @@
 package com.shengbojia.notes.data
 
 import android.app.Application
-import android.arch.lifecycle.LiveData
-import android.content.Context
+import androidx.lifecycle.LiveData
 import android.os.AsyncTask
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Repository for handling data operations.
  */
-class NoteRepository private constructor(application: Application){
-    private var noteDao: NoteDao = NoteDatabase.getInstance(application).noteDao()
+class NoteRepository private constructor(
+    private val noteDao: NoteDao
+){
 
-    fun insert(note: Note) {
-        InsertNoteAsyncTask(noteDao).execute(note)
+    suspend fun insert(note: Note) {
+        withContext(Dispatchers.IO) {
+            noteDao.insert(note)
+        }
     }
 
-    fun update(note: Note) {
-        UpdateNoteAsyncTask(noteDao).execute(note)
+    suspend fun update(note: Note) {
+        withContext(Dispatchers.IO) {
+            noteDao.update(note)
+        }
     }
 
-    fun delete(note: Note) {
-        DeleteNoteAsyncTask(noteDao).execute(note)
+    suspend fun delete(note: Note) {
+        withContext(Dispatchers.IO) {
+            noteDao.delete(note)
+        }
     }
 
-    fun deleteAllNotes() {
-        DeleteAllNoteAsyncTask(noteDao).execute()
+    suspend fun deleteAllNotes() {
+        withContext(Dispatchers.IO) {
+            noteDao.deleteAllNotes()
+        }
     }
 
-    fun getAllNotes(): LiveData<List<Note>> {
-        return noteDao.getAllNotes()
-    }
+    fun getNote(noteId: Int): LiveData<Note> = noteDao.getNote(noteId)
+
+    fun getAllNotes(): LiveData<List<Note>> = noteDao.getAllNotes()
 
     // Singleton instantiation
     companion object {
         @Volatile
         private var INSTANCE: NoteRepository? = null
 
-        fun getInstance(application: Application): NoteRepository =
+        fun getInstance(noteDao: NoteDao): NoteRepository =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: NoteRepository(application).also { INSTANCE = it }
+                INSTANCE ?: NoteRepository(noteDao).also { INSTANCE = it }
             }
     }
 
+    /*
     // TODO: Use Kotlin's co-routines instead of AsyncTask
     private class InsertNoteAsyncTask internal constructor(
         private val noteDao: NoteDao
@@ -82,4 +93,5 @@ class NoteRepository private constructor(application: Application){
             return
         }
     }
+    */
 }
