@@ -54,7 +54,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    // TODO: Use Kotlin's co-routines instead of AsyncTask
+    // TODO: Use a work manager instead of asynctask
     private class PopulateDbAsyncClass constructor(db: AppDatabase?) : AsyncTask<Unit, Unit, Unit>() {
         private var noteDao = db?.noteDao() ?: throw IllegalStateException("Database uninitialized")
 
