@@ -1,65 +1,45 @@
 package com.shengbojia.notes.ui
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.shengbojia.notes.R
-import com.shengbojia.notes.adapter.NoteAdapter
-import com.shengbojia.notes.viewmodel.NoteViewModel
-
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import com.shengbojia.notes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var noteViewModel: NoteViewModel
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar_main)
 
-        recyclerView_main_noteList.layoutManager = LinearLayoutManager(this)
-        recyclerView_main_noteList.setHasFixedSize(true)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val adapter = NoteAdapter(this)
-        recyclerView_main_noteList.adapter = adapter
+        navController = Navigation.findNavController(this, R.id.nav_host_frag)
 
-        noteViewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
-        noteViewModel.getAllNotes().observe(this, Observer { notes ->
-            notes?.let { adapter.setNotes(it) }
-        })
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
 
-        fab.setOnClickListener {
-            onFabClick(it)
-        }
+        setSupportActionBar(binding.toolbarMain)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    // TODO: Add a delete all feature, and make it pop up a confirmation dialog
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_deleteAll -> {
-                dialogConfirmation()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+    override fun onSupportNavigateUp(): Boolean =
+        navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    /*
 
     private fun dialogConfirmation() {
         val builder = AlertDialog.Builder(this, R.style.ConfirmationDialogStyle)
@@ -79,6 +59,8 @@ class MainActivity : AppCompatActivity() {
         val addIntent = Intent(this, AddEditNoteActivity::class.java)
         startActivity(addIntent)
     }
+
+    */
 
     companion object {
         private const val TAG = "ActMain"
