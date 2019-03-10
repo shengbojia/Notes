@@ -18,7 +18,7 @@ import com.shengbojia.notes.utility.InjectorUtils
 import com.shengbojia.notes.viewmodel.AddNoteViewModel
 
 /**
- * A simple [Fragment] subclass.
+ * [Fragment] for writing and saving a new note.
  *
  */
 class AddNoteFragment : Fragment() {
@@ -35,6 +35,7 @@ class AddNoteFragment : Fragment() {
 
         binding = FragmentAddNoteBinding.inflate(inflater, container, false)
 
+        // Set up number picker
         binding.numpickerAddPriority.minValue = 1
         binding.numpickerAddPriority.maxValue = 5
 
@@ -56,6 +57,9 @@ class AddNoteFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
 
+    /**
+     * Calls the repository to insert a new note into the database.
+     */
     private fun saveNewNote() {
         val title = binding.etAddTitle.text.toString()
         val desc = binding.etAddDesc.text.toString()

@@ -18,10 +18,10 @@ import com.shengbojia.notes.utility.InjectorUtils
 import com.shengbojia.notes.viewmodel.EditNoteViewModel
 
 /**
- * A simple [Fragment] subclass.
+ * [Fragment] for editing an existing note.
  *
  */
-class EditNoteFragment : androidx.fragment.app.Fragment() {
+class EditNoteFragment : Fragment() {
 
     private lateinit var editNoteViewModel: EditNoteViewModel
 
@@ -33,7 +33,7 @@ class EditNoteFragment : androidx.fragment.app.Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val factory = InjectorUtils.provideEditNoteViewModelFactory(requireActivity(), args.noteId)
         editNoteViewModel = ViewModelProviders.of(this, factory).get(EditNoteViewModel::class.java)
 
@@ -44,7 +44,6 @@ class EditNoteFragment : androidx.fragment.app.Fragment() {
         }
 
         setHasOptionsMenu(true)
-
 
         return binding.root
     }
@@ -63,6 +62,9 @@ class EditNoteFragment : androidx.fragment.app.Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
 
+    /**
+     * Calls the repository to update the edited note in the database.
+     */
     private fun saveEditedNote() {
 
         val title = binding.etAddTitle.text.toString()

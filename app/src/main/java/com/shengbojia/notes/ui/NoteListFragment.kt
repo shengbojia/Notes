@@ -24,8 +24,8 @@ import com.shengbojia.notes.viewmodel.NoteListViewModel
 
 
 /**
- * A simple [Fragment] subclass.
- *
+ * [NoteListFragment] displays saved notes in a [RecyclerView], and has a [FloatingActionButton] for
+ * adding new notes.
  */
 class NoteListFragment : Fragment() {
 
@@ -35,8 +35,8 @@ class NoteListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val binding = FragmentNoteListBinding.inflate(inflater, container, false)
-        val context = context ?: return binding.root
 
         val factory = InjectorUtils.provideNoteListViewModelFactory(requireContext())
         viewModel = ViewModelProviders.of(this, factory).get(NoteListViewModel::class.java)
@@ -44,6 +44,7 @@ class NoteListFragment : Fragment() {
         val adapter = NoteAdapter()
         binding.recyclerViewNoteList.adapter = adapter
 
+        // Registers an observer for the LiveData
         subscribeUi(adapter)
 
         setHasOptionsMenu(true)
