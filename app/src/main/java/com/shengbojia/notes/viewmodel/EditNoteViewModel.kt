@@ -1,5 +1,6 @@
 package com.shengbojia.notes.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shengbojia.notes.data.Note
@@ -12,8 +13,13 @@ import kotlinx.coroutines.launch
  * [ViewModel] used in
  */
 class EditNoteViewModel internal constructor(
-    private val repository: NoteRepository
+    private val repository: NoteRepository,
+    private val noteId: Int
+
+// TODO: make a get note in dao, so that we can open up note in edit mode by id
 ) : ViewModel() {
+
+    val note: LiveData<Note> = repository.getNote(noteId)
 
     /**
      * Cancels all coroutines when ViewModel is cleared.
@@ -22,12 +28,6 @@ class EditNoteViewModel internal constructor(
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
-    }
-
-    fun saveNewNote(note: Note) {
-        viewModelScope.launch {
-            repository.insert(note)
-        }
     }
 
     fun saveEditedNote(note: Note) {
