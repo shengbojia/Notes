@@ -34,11 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         // Set up ActionBar
         setSupportActionBar(binding.toolbarMain)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.toolbarMain.setupWithNavController(navController, appBarConfiguration)
     }
 
-    override fun onSupportNavigateUp(): Boolean =
-        navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+
     /*
 
     private fun dialogConfirmation() {

@@ -59,6 +59,7 @@ class NoteListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =

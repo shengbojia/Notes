@@ -29,6 +29,7 @@ class AddNoteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val factory = InjectorUtils.provideAddNoteViewModelFactory(requireContext())
         addNoteViewModel = ViewModelProviders.of(this, factory)
             .get(AddNoteViewModel::class.java)
@@ -45,6 +46,7 @@ class AddNoteFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_add, menu)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =

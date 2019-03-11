@@ -35,7 +35,8 @@ class EditNoteFragment : Fragment() {
     ): View? {
 
         val factory = InjectorUtils.provideEditNoteViewModelFactory(requireActivity(), args.noteId)
-        editNoteViewModel = ViewModelProviders.of(this, factory).get(EditNoteViewModel::class.java)
+        editNoteViewModel = ViewModelProviders.of(this, factory)
+            .get(EditNoteViewModel::class.java)
 
         binding = FragmentEditNoteBinding.inflate(inflater, container, false)
         binding.apply {
@@ -50,6 +51,7 @@ class EditNoteFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_add, menu)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
