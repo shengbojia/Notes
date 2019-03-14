@@ -16,5 +16,4 @@
 
     <style name="ConfirmationDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert"/>
 
-
 </resources>
