@@ -22,3 +22,4 @@ Things you can do with Notes:
 ## Demo
 
 ## License
+Notes is under the MIT license. See the [LICENSE](LICENSE) for more information.
