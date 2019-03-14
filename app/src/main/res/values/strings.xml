@@ -1,21 +1,25 @@
 <resources>
     <string name="app_name">Notes</string>
-    <string name="action_deleteAll">Delete All</string>
+
     <string name="all_title">Title</string>
     <string name="all_description">Description</string>
     <string name="all_priority">Priority</string>
 
-    <string name="addEdit_addNote">Add note</string>
-    <string name="addEdit_editNote">Edit note</string>
+    <string name="action_deleteAll">Delete All</string>
+
+    <string name="prepopulate_title_1">Capture what\'s on your mind, on the go</string>
+    <string name="prepopulate_title_2">Title 2</string>
+    <string name="prepopulate_desc_1">Description 1</string>
+    <string name="prepopulate_desc_2">Description 2</string>
+
+    <string name="fragment_title_addNote">Add note</string>
+    <string name="fragment_title_editNote">Edit note</string>
 
     <string name="toast_contentEmptyMessage">Please enter a title and a description</string>
     <string name="toast_savedSuccess">Saved!</string>
     <string name="toast_idError">An error has occurred, edit not saved.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dialog_confirmationTitle">Are you sure?</string>
     <string name="dialog_positive">Yes</string>
     <string name="dialog_cancel">I\'ve changed my mind</string>
-    <string name="title_activity_notes">NotesActivity</string>
 </resources>

@@ -7,28 +7,28 @@
 
     <fragment android:id="@+id/noteListFragment"
               android:name="com.shengbojia.notes.ui.NoteListFragment"
-              android:label="Notes"
+              android:label="@string/app_name"
               tools:layout="@layout/fragment_note_list">
 
         <action android:id="@+id/action_noteListFragment_to_editNoteFragment"
                 app:destination="@id/editNoteFragment"
                 app:enterAnim="@anim/expand_open"
-                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 
         <action android:id="@+id/action_noteListFragment_to_addNoteFragment"
                 app:enterAnim="@anim/expand_from_corner"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"
-                app:destination="@id/addNoteFragment" app:exitAnim="@anim/nav_default_exit_anim"
+                app:destination="@id/addNoteFragment"
+                app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"/>
 
     </fragment>
 
-    <!-- TODO: set different labels for add/edit, consider making it a boolean data -->
-
     <fragment android:id="@+id/editNoteFragment"
               android:name="com.shengbojia.notes.ui.EditNoteFragment"
-              android:label="edit notes"
+              android:label="@string/fragment_title_editNote"
               tools:layout="@layout/fragment_edit_note">
         <argument
                 android:name="noteId"
@@ -38,6 +38,6 @@
     <fragment
             android:id="@+id/addNoteFragment"
             android:name="com.shengbojia.notes.ui.AddNoteFragment"
-            android:label="Add note"
+            android:label="@string/fragment_title_editNote"
             tools:layout="@layout/fragment_add_note"/>
 </navigation>
