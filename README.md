@@ -24,9 +24,11 @@ Things you can do with Notes:
 * Press the "+" button to add a new note
 * Edit an existing note by tapping on it
 * A note can have a title, short description, and a priority rating
+* Notes are listed in chronological order
 * Quickly clear all notes from the main screen
 
 ## Showcase
+
 
 ## License
 Notes is under the MIT license. See the [LICENSE](LICENSE) for more information.
