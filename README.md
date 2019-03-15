@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="screenshots/intro_startup.gif">
+  <img src="https://user-images.githubusercontent.com/26352502/54402892-45bb6280-46a4-11e9-9613-848975991bcd.gif">
 </p>
 
 ## Table of Contents
@@ -29,7 +29,7 @@ Things you can do with Notes:
 * Quickly clear all notes from the main screen
 
 ## Showcase
-
+![Opening a Note](https://user-images.githubusercontent.com/26352502/54402838-08ef6b80-46a4-11e9-8792-83dde17ed0b3.gif)
 
 ## Libraries Used
 
