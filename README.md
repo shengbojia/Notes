@@ -12,6 +12,9 @@
 * [Introduction](#introduction)
 * [Features](#features)
 * [Showcase](#showcase)
+  * [Add a new Note](#add-a-new-note)
+  * [Open and view a Note](#open-and-view-a-note)
+  * [Edit an existing Note](#edit-an-existing-note)
 * [Libraries Used](#libraries-used)
 * [License](*license)
 
@@ -40,7 +43,7 @@ Things you can do with Notes:
   <img src="https://user-images.githubusercontent.com/26352502/54402838-08ef6b80-46a4-11e9-8792-83dde17ed0b3.gif" alt="Open a Note">
 </p>
 
-### Edit an exisiting Note
+### Edit an existing Note
 <p align="center">
   <img src="https://user-images.githubusercontent.com/26352502/54403855-f119e680-46a7-11e9-8022-45ebcb189fb3.gif" alt="Edit a Note">
 </p>
