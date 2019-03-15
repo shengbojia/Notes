@@ -4,7 +4,7 @@ Android app for keeping track of ideas, on the go.
 ## Table of Contents
 * [Introduction](#introduction)
 * [Features](#features)
-* [Demo](#demo)
+* [Showcase](#showcase)
 * [License](*license)
 
 ## Introduction
@@ -19,7 +19,7 @@ Things you can do with Notes:
 * A note can have a title, short description, and a priority rating
 * Quickly clear all notes from the main screen
 
-## Demo
+## Showcase
 
 ## License
 Notes is under the MIT license. See the [LICENSE](LICENSE) for more information.
