@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Notes</string>
 
+    <string name="fragment_title_addNote">Add note</string>
+    <string name="fragment_title_editNote">Edit note</string>
+
+    <!-- The labels for the three fields that users can alter -->
     <string name="all_title">Title</string>
     <string name="all_description">Description</string>
     <string name="all_priority">Priority</string>
@@ -11,9 +15,6 @@
     <string name="prepopulate_title_2">Title 2</string>
     <string name="prepopulate_desc_1">Description 1</string>
     <string name="prepopulate_desc_2">Description 2</string>
-
-    <string name="fragment_title_addNote">Add note</string>
-    <string name="fragment_title_editNote">Edit note</string>
 
     <string name="toast_contentEmptyMessage">Please enter a title and a description</string>
     <string name="toast_savedSuccess">Saved!</string>

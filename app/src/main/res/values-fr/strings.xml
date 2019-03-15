@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_title_addNote">Ajouter</string>
+    <string name="fragment_title_editNote">Modifier</string>
+
+    <string name="all_title">Titre</string>
+    <string name="all_description">Description</string>
+    <string name="all_priority">Priorité</string>
+
+    <string name="action_deleteAll">Supprimer tout</string>
+
+    <string name="toast_savedSuccess">Enregistré!</string>
+</resources>
