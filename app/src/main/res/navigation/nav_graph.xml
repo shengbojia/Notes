@@ -38,6 +38,6 @@
     <fragment
             android:id="@+id/addNoteFragment"
             android:name="com.shengbojia.notes.ui.AddNoteFragment"
-            android:label="@string/fragment_title_editNote"
+            android:label="@string/fragment_title_addNote"
             tools:layout="@layout/fragment_add_note"/>
 </navigation>

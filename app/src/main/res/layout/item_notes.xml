@@ -22,7 +22,10 @@
             android:layout_marginStart="@dimen/margin_all_note">
 
         <RelativeLayout
-                android:padding="8dp"
+                android:paddingTop="@dimen/padding_itemNotes_vertical"
+                android:paddingBottom="@dimen/padding_itemNotes_vertical"
+                android:paddingStart="@dimen/padding_itemNotes_horizontal"
+                android:paddingEnd="@dimen/padding_itemNotes_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 

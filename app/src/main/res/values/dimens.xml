@@ -1,5 +1,8 @@
 <resources>
     <dimen name="margin_all_note">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="padding_itemNotes_vertical">16dp</dimen>
+    <dimen name="padding_itemNotes_horizontal">8dp</dimen>
     <dimen name="padding_addScreen">16dp</dimen>
 </resources>
