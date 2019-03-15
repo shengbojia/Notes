@@ -5,13 +5,14 @@
 </p>
 
 <p align="center">
-  <img src="https://github.com/shengbojia/Notes/blob/master/screenshots/intro_startup.gif">
+  <img src="screenshots/intro_startup.gif">
 </p>
 
 ## Table of Contents
 * [Introduction](#introduction)
 * [Features](#features)
 * [Showcase](#showcase)
+* [Libraries Used](#libraries-used)
 * [License](*license)
 
 ## Introduction
@@ -29,6 +30,8 @@ Things you can do with Notes:
 
 ## Showcase
 
+
+## Libraries Used
 
 ## License
 Notes is under the MIT license. See the [LICENSE](LICENSE) for more information.
