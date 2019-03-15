@@ -30,14 +30,20 @@ Things you can do with Notes:
 
 ## Showcase
 
-#### Add a new Note
-![Adding a Note](https://user-images.githubusercontent.com/26352502/54404054-a51b7180-46a8-11e9-9a83-606bce51ea0c.gif)
+### Add a new Note
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/26352502/54404054-a51b7180-46a8-11e9-9a83-606bce51ea0c.gif" alt="Add a Note">
+</p>
 
-#### Open and view a Note
-![Opening a Note](https://user-images.githubusercontent.com/26352502/54402838-08ef6b80-46a4-11e9-8792-83dde17ed0b3.gif)
+### Open and view a Note
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/26352502/54402838-08ef6b80-46a4-11e9-8792-83dde17ed0b3.gif" alt="Open a Note">
+</p>
 
-#### Edit an exisiting Note
-![Editing a Note](https://user-images.githubusercontent.com/26352502/54403855-f119e680-46a7-11e9-8022-45ebcb189fb3.gif)
+### Edit an exisiting Note
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/26352502/54403855-f119e680-46a7-11e9-8022-45ebcb189fb3.gif" alt="Edit a Note">
+</p>
 
 ## Libraries Used
 
