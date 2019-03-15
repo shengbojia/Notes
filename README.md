@@ -1,5 +1,12 @@
-# Notes
-Android app for keeping track of ideas, on the go.
+<h1 align="center"> Notes </h1> <br>
+
+<p align="center">
+  Android app for keeping track of ideas, on the go.
+</p>
+
+<p align="center">
+  <img src="https://github.com/shengbojia/Notes/blob/master/screenshots/intro_startup.gif">
+</p>
 
 ## Table of Contents
 * [Introduction](#introduction)
