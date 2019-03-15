@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_title_addNote">新笔记</string>
+    <string name="fragment_title_editNote">修改</string>
+
+    <string name="all_title">标题</string>
+    <string name="all_description">描述</string>
+    <string name="all_priority">位次</string>
+
+    <string name="action_deleteAll">删掉所有笔记</string>
+
+    <string name="toast_savedSuccess">保存成功!</string>
+</resources>
