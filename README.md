@@ -33,8 +33,10 @@ Things you can do with Notes:
 #### Add a new Note
 ![Adding a Note](https://user-images.githubusercontent.com/26352502/54404054-a51b7180-46a8-11e9-9a83-606bce51ea0c.gif)
 
-#### Edit an existing Note
+#### Open and view a Note
 ![Opening a Note](https://user-images.githubusercontent.com/26352502/54402838-08ef6b80-46a4-11e9-8792-83dde17ed0b3.gif)
+
+#### Edit an exisiting Note
 ![Editing a Note](https://user-images.githubusercontent.com/26352502/54403855-f119e680-46a7-11e9-8022-45ebcb189fb3.gif)
 
 ## Libraries Used
