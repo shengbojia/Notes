@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.item_notes.view.*
 /**
  * Adapter for the [RecyclerView] in [MainActivity]
  */
-
 class NoteAdapter : ListAdapter<Note, NoteAdapter.NoteHolder>(NoteDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder =
