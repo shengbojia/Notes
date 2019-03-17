@@ -8,6 +8,9 @@ import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import android.content.Context
 import android.os.AsyncTask
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.shengbojia.notes.worker.PopulateDatabaseWorker
 import java.lang.IllegalStateException
 
 /**
@@ -44,6 +47,8 @@ abstract class AppDatabase : RoomDatabase() {
     private object RoomCallBack : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
+            val request = OneTimeWorkRequestBuilder<PopulateDatabaseWorker>().build()
+            WorkManager.getInstance().enqueue(request)
         }
     }
 
@@ -54,7 +59,8 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    // TODO: Use a work manager instead of asynctask
+    // Worker used instead
+    /*
     private class PopulateDbAsyncClass constructor(db: AppDatabase?) : AsyncTask<Unit, Unit, Unit>() {
         private var noteDao = db?.noteDao() ?: throw IllegalStateException("Database uninitialized")
 
@@ -75,4 +81,5 @@ abstract class AppDatabase : RoomDatabase() {
             )
         }
     }
+    */
 }
