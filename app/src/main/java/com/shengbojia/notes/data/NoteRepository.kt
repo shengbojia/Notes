@@ -3,6 +3,7 @@ package com.shengbojia.notes.data
 import android.app.Application
 import androidx.lifecycle.LiveData
 import android.os.AsyncTask
+import androidx.annotation.WorkerThread
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -13,24 +14,28 @@ class NoteRepository private constructor(
     private val noteDao: NoteDao
 ) {
 
+    @WorkerThread
     suspend fun insert(note: Note) {
         withContext(Dispatchers.IO) {
             noteDao.insert(note)
         }
     }
 
+    @WorkerThread
     suspend fun update(note: Note) {
         withContext(Dispatchers.IO) {
             noteDao.update(note)
         }
     }
 
+    @WorkerThread
     suspend fun delete(note: Note) {
         withContext(Dispatchers.IO) {
             noteDao.delete(note)
         }
     }
 
+    @WorkerThread
     suspend fun deleteAllNotes() {
         withContext(Dispatchers.IO) {
             noteDao.deleteAllNotes()
