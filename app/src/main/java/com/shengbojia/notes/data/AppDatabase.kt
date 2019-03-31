@@ -16,7 +16,7 @@ import java.lang.IllegalStateException
 /**
  * Room database for the app.
  */
-@Database(entities = [Note::class], version = 2 )
+@Database(entities = [Note::class], version = 1 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -39,7 +39,6 @@ abstract class AppDatabase : RoomDatabase() {
                     "note_database"
                 )
                     .addCallback(RoomCallBack)
-                    .addMigrations(Migration1To2)
                     .build()
     }
 

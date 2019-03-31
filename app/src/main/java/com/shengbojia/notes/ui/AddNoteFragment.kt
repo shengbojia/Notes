@@ -36,10 +36,6 @@ class AddNoteFragment : Fragment() {
 
         binding = FragmentAddNoteBinding.inflate(inflater, container, false)
 
-        // Set up number picker
-        binding.numpickerAddPriority.minValue = 1
-        binding.numpickerAddPriority.maxValue = 5
-
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -65,7 +61,6 @@ class AddNoteFragment : Fragment() {
     private fun saveNewNote() {
         val title = binding.etAddTitle.text.toString()
         val desc = binding.etAddDesc.text.toString()
-        val priority = binding.numpickerAddPriority.value
 
         if (title.isBlank() && desc.isBlank()) {
             return
@@ -74,8 +69,7 @@ class AddNoteFragment : Fragment() {
         addNoteViewModel.saveNewNote(
             Note(
                 title = title,
-                description = desc,
-                priority = priority
+                description = desc
             )
         )
 

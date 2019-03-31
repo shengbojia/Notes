@@ -71,7 +71,6 @@ class EditNoteFragment : Fragment() {
 
         val title = binding.etAddTitle.text.toString()
         val desc = binding.etAddDesc.text.toString()
-        val priority = binding.numpickerAddPriority.value
 
         if (title.isBlank() && desc.isBlank()) {
             return
@@ -81,8 +80,7 @@ class EditNoteFragment : Fragment() {
             Note(
                 id = args.noteId,
                 title = title,
-                description = desc,
-                priority = priority
+                description = desc
             )
         )
 

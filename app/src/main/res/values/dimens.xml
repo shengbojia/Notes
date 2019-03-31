@@ -4,5 +4,11 @@
 
     <dimen name="padding_itemNotes_vertical">16dp</dimen>
     <dimen name="padding_itemNotes_horizontal">8dp</dimen>
+
     <dimen name="padding_addScreen">16dp</dimen>
+
+
+    <dimen name="textSize_desc">14sp</dimen>
+    <dimen name="textSize_title">20sp</dimen>
+
 </resources>

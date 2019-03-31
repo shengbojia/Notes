@@ -27,15 +27,13 @@ class PopulateDatabaseWorker(
                     noteDao().insert(
                         Note(
                             title = "Capture what's on your mind, on the go",
-                            description = "description 1",
-                            priority = 1
+                            description = "description 1"
                         )
                     )
                     noteDao().insert(
                         Note(
                             title = "Test title 2",
-                            description = "description 2",
-                            priority = 2
+                            description = "description 2"
                         )
                     )
                 }
