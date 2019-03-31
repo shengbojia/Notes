@@ -9,47 +9,31 @@
                   type="com.shengbojia.notes.viewmodel.EditNoteViewModel"/>
 
     </data>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-
+    <com.shengbojia.notes.ui.FixedFocusScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         <LinearLayout
-                android:padding="@dimen/padding_addScreen"
                 android:orientation="vertical"
+                android:padding="@dimen/padding_itemNotes_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
             <EditText
                     android:id="@+id/et_add_title"
-                    android:padding="@dimen/padding_addScreen"
-                    android:inputType="text"
                     android:text="@{viewModel.note.title}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    tools:text="@string/all_title"
+                    app:backgroundTint="@android:color/darker_gray"
+                    style="@style/NoteEditTextTitleStyle"/>
 
             <EditText
                     android:id="@+id/et_add_desc"
-                    android:padding="@dimen/padding_addScreen"
                     android:text="@{viewModel.note.description}"
-                    android:inputType="text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    android:text="@string/all_priority"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            <NumberPicker
-                    android:id="@+id/numpicker_add_priority"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:currentPriority="@{viewModel.note.priority}">
-
-            </NumberPicker>
+                    app:backgroundTint="@android:color/darker_gray"
+                    tools:text="Howdy\npartner"
+                    style="@style/NoteEditTextDescriptionStyle"/>
 
         </LinearLayout>
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </com.shengbojia.notes.ui.FixedFocusScrollView>
 </layout>
