@@ -23,4 +23,6 @@
     <string name="dialog_confirmationTitle">Are you sure?</string>
     <string name="dialog_positive">Yes</string>
     <string name="dialog_cancel">I\'ve changed my mind</string>
+
+    <string name="action_save">Save</string>
 </resources>
