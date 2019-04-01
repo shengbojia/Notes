@@ -7,6 +7,7 @@
     <color name="colorDarkerGray">#AAAAAA</color>
     <color name="colorBlack">#000000</color>
 
-    <color name="colorTextGray">#808080</color>
+    <color name="colorTextGray">#585858</color>
+    <color name="colorLightGray">#A7A7A7</color>
 
 </resources>

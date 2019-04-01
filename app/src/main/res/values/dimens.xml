@@ -7,8 +7,13 @@
 
     <dimen name="padding_addScreen">16dp</dimen>
 
+    <dimen name="margin_dateFromDesc">24dp</dimen>
+
 
     <dimen name="textSize_desc">14sp</dimen>
     <dimen name="textSize_title">20sp</dimen>
+
+    <dimen name="textSize_titleList">18sp</dimen>
+    <dimen name="textSize_descList">12sp</dimen>
 
 </resources>

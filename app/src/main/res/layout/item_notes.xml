@@ -17,9 +17,7 @@
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
             android:onClick="@{clickListener}"
-            android:layout_marginTop="@dimen/margin_all_note"
-            android:layout_marginEnd="@dimen/margin_all_note"
-            android:layout_marginStart="@dimen/margin_all_note">
+            android:layout_marginTop="@dimen/margin_all_note">
 
         <RelativeLayout
                 android:paddingTop="@dimen/padding_itemNotes_vertical"
@@ -32,7 +30,8 @@
             <TextView
                     android:id="@+id/tv_note_title"
                     android:text="@{note.title}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textSize_titleList"
                     android:maxLines="1"
                     android:layout_alignParentStart="true"
                     android:ellipsize="end"
@@ -43,12 +42,26 @@
             <TextView
                     android:id="@+id/tv_note_desc"
                     android:layout_below="@id/tv_note_title"
+                    android:layout_alignParentStart="true"
                     android:text="@{note.description}"
+                    android:textSize="@dimen/textSize_descList"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    android:textColor="@color/colorTextGray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="@string/all_description"/>
+
+            <TextView
+                    android:id="@+id/tv_note_date"
+                    android:layout_below="@id/tv_note_desc"
+                    android:layout_marginTop="@dimen/margin_dateFromDesc"
+                    android:textSize="@dimen/textSize_descList"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorLightGray"
+                    android:text="September 26, 2018, 1:24 PM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
 
         </RelativeLayout>
