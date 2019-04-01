@@ -59,7 +59,8 @@
                     android:textSize="@dimen/textSize_descList"
                     android:layout_alignParentStart="true"
                     android:textColor="@color/colorLightGray"
-                    android:text="September 26, 2018, 1:24 PM"
+                    app:writtenDate="@{note.dateWritten}"
+                    tools:text="September 26, 2018, 1:24 PM"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
