@@ -4,5 +4,9 @@
     <color name="colorPrimaryDark">#FAFAFA</color>
     <color name="colorAccent">#4D240E</color>
 
-    <color name="colorDescFont">#E65100</color>
+    <color name="colorDarkerGray">#AAAAAA</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorTextGray">#808080</color>
+
 </resources>

@@ -22,13 +22,13 @@
                     android:id="@+id/et_add_title"
                     android:text="@{viewModel.note.title}"
                     tools:text="@string/all_title"
-                    app:backgroundTint="@android:color/darker_gray"
+                    app:backgroundTint="@color/colorDarkerGray"
                     style="@style/NoteEditTextTitleStyle"/>
 
             <EditText
                     android:id="@+id/et_add_desc"
                     android:text="@{viewModel.note.description}"
-                    app:backgroundTint="@android:color/darker_gray"
+                    app:backgroundTint="@color/colorDarkerGray"
                     tools:text="Howdy\npartner"
                     style="@style/NoteEditTextDescriptionStyle"/>
 

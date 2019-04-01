@@ -7,6 +7,5 @@
             android:id="@+id/save_note"
             android:icon="@drawable/ic_save_grey_24dp"
             android:title="@string/action_save"
-            app:itemIconTint="@android:color/darker_gray"
             app:showAsAction="ifRoom"/>
 </menu>

@@ -17,13 +17,13 @@
             <EditText
                     android:id="@+id/et_add_title"
                     android:hint="@string/all_title"
-                    app:backgroundTint="@android:color/darker_gray"
+                    app:backgroundTint="@color/colorDarkerGray"
                     style="@style/NoteEditTextTitleStyle"/>
 
             <EditText
                     android:id="@+id/et_add_desc"
                     android:hint="@string/all_description"
-                    app:backgroundTint="@android:color/darker_gray"
+                    app:backgroundTint="@color/colorDarkerGray"
                     style="@style/NoteEditTextDescriptionStyle"/>
         </LinearLayout>
 
