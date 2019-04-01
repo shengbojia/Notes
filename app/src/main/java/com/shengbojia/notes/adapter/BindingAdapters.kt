@@ -1,6 +1,5 @@
 package com.shengbojia.notes.adapter
 
-import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.shengbojia.notes.utility.DateRegexUtil
@@ -8,6 +7,9 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Enum class for the different possible relations between two [Date]s.
+ */
 private enum class DateStatus {
     SAME_WEEK,
     SAME_YEAR,
@@ -15,27 +17,9 @@ private enum class DateStatus {
 }
 
 /**
- * Binds the displayed priority for each [CardView] in [NotesListFragment].
+ * Sets the date string to display in each note. Changes depending on when the note was written,
+ * e.g. Weekday if written this week, Month + Day if outside of this week but same year, etc.
  */
-@BindingAdapter("app:priority")
-fun bindPriority(view: TextView, priority: Int?) {
-    if (priority != null) {
-        view.text = priority.toString()
-    }
-}
-
-/**
- * Sets the number picker when inflating layout of [EditNoteFragment].
- */
-@BindingAdapter("app:currentPriority")
-fun bindCurrentPriority(view: NumberPicker, priority: Int?) {
-    if (priority != null) {
-        view.minValue = 1
-        view.maxValue = 5
-        view.value = priority
-    }
-}
-
 @BindingAdapter("app:writtenDate")
 fun bindWrittenDate(view: TextView, dateWritten: Calendar?) {
     val date = dateWritten?.time ?: Date(0)
@@ -54,6 +38,9 @@ fun bindWrittenDate(view: TextView, dateWritten: Calendar?) {
 
 }
 
+/**
+ * Determines whether a [Date] and a [Calendar] are within the same year, week, or neither.
+ */
 private fun dateRelativeToCalendar(date: Date, calendar: Calendar): DateStatus {
     val day = calendar.get(Calendar.DAY_OF_WEEK)
     val week = calendar.get(Calendar.WEEK_OF_MONTH)
