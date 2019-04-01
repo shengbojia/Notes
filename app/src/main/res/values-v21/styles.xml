@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="AppTheme" parent="BaseAppTheme">
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+    </style>
 </resources>

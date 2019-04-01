@@ -9,7 +9,6 @@
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme">
-        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
