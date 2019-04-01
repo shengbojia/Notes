@@ -22,6 +22,7 @@
                     android:id="@+id/et_add_title"
                     android:text="@{viewModel.note.title}"
                     tools:text="@string/all_title"
+                    android:imeOptions="actionDone"
                     app:backgroundTint="@color/colorDarkerGray"
                     style="@style/NoteEditTextTitleStyle"/>
 

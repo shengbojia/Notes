@@ -4,6 +4,7 @@ package com.shengbojia.notes.ui
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.app.NavUtils
@@ -15,6 +16,7 @@ import com.shengbojia.notes.R
 import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.databinding.FragmentAddNoteBinding
 import com.shengbojia.notes.utility.InjectorUtils
+import com.shengbojia.notes.utility.ViewUtils
 import com.shengbojia.notes.viewmodel.AddNoteViewModel
 
 /**
@@ -73,8 +75,8 @@ class AddNoteFragment : Fragment() {
             )
         )
 
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+        ViewUtils.hideSoftKeyboard(activity)
+
         Toast.makeText(activity, getString(R.string.toast_savedSuccess), Toast.LENGTH_SHORT).show()
     }
 
