@@ -25,4 +25,5 @@
     <string name="dialog_cancel">I\'ve changed my mind</string>
 
     <string name="action_save">Save</string>
+    <string name="contextAction_delete">Delete selected</string>
 </resources>
