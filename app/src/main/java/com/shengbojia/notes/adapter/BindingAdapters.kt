@@ -42,17 +42,13 @@ fun bindWrittenDate(view: TextView, dateWritten: Calendar?) {
  * Determines whether a [Date] and a [Calendar] are within the same year, week, or neither.
  */
 private fun dateRelativeToCalendar(date: Date, calendar: Calendar): DateStatus {
-    val day = calendar.get(Calendar.DAY_OF_WEEK)
-    val week = calendar.get(Calendar.WEEK_OF_MONTH)
-    val month = calendar.get(Calendar.MONTH)
+    val week = calendar.get(Calendar.WEEK_OF_YEAR)
     val year = calendar.get(Calendar.YEAR)
 
     val tempCalendar = Calendar.getInstance()
     tempCalendar.time = date
 
-    val tempDay = tempCalendar.get(Calendar.DAY_OF_WEEK)
-    val tempWeek = tempCalendar.get(Calendar.WEEK_OF_MONTH)
-    val tempMonth = tempCalendar.get(Calendar.MONTH)
+    val tempWeek = tempCalendar.get(Calendar.WEEK_OF_YEAR)
     val tempYear = tempCalendar.get(Calendar.YEAR)
 
     if (year != tempYear) {

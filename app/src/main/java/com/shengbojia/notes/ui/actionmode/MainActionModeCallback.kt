@@ -34,6 +34,7 @@ class MainActionModeCallback(
     }
 
     override fun onDestroyActionMode(mode: ActionMode?) {
+        selectedNotes = hashSetOf()
         adapter.turnOffActionMode()
         adapter.notifyDataSetChanged()
     }
