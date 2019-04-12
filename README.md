@@ -27,9 +27,10 @@ Things you can do with Notes:
 * View a list of saved notes
 * Press the "+" button to add a new note
 * Edit an existing note by tapping on it
-* A note can have a title, short description, and a priority rating
-* Notes are listed in chronological order
+* Notes are timestamped based on the last save
+* Long press to enter multi-selection mode
 * Quickly clear all notes from the main screen
+* Multilingual support for English, French, Chinese, and many more
 
 ## Showcase
 
@@ -47,6 +48,13 @@ Things you can do with Notes:
 <p align="center">
   <img src="https://user-images.githubusercontent.com/26352502/56067914-ee63ed00-5d4a-11e9-97ec-fdd7a1ee1e16.gif" alt="Edit a Note">
 </p>
+
+### Multilingual support
+
+### Other features
+Mutlti-select to Delete            |  Extensive support for a variety of languages and locales
+:---------------------------------:|:----------------------------------------------------------:
+![](https://...Ocean.png)  |  ![](https://...Dark.png)
 
 ## Libraries Used
 
