@@ -1,15 +1,11 @@
 package com.shengbojia.notes.ui
 
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
 import com.shengbojia.notes.R
@@ -60,7 +56,6 @@ class EditNoteFragment : Fragment() {
         when (item.itemId) {
             R.id.save_note -> {
                 saveEditedNote()
-                findNavController().navigateUp()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -71,8 +66,8 @@ class EditNoteFragment : Fragment() {
      */
     private fun saveEditedNote() {
 
-        val title = binding.etAddTitle.text.toString()
-        val desc = binding.etAddDesc.text.toString()
+        val title = binding.etEditTitle.text.toString()
+        val desc = binding.etEditDesc.text.toString()
 
         if (title.isBlank() && desc.isBlank()) {
             return
@@ -87,9 +82,11 @@ class EditNoteFragment : Fragment() {
         )
 
 
-        ViewUtils.hideSoftKeyboard(activity)
+        ViewUtils.hideSoftKeyboard(activity, view)
 
         Toast.makeText(activity, getString(R.string.toast_savedSuccess), Toast.LENGTH_SHORT).show()
+
+        ViewUtils.exitFocus(binding.etEditDummy)
     }
 
 }

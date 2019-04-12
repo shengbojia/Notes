@@ -22,7 +22,7 @@ class DeleteNoteViewModel internal constructor(
         viewModelScope.cancel()
     }
 
-    fun deleteNotes(notesToDelete: List<Note>) {
+    fun deleteNotes(notesToDelete: Collection<Note>) {
         viewModelScope.launch {
             for (note in notesToDelete) {
                 repository.delete(note)

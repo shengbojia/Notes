@@ -13,6 +13,10 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+            <EditText
+                    android:id="@+id/et_add_dummy"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
 
             <EditText
                     android:id="@+id/et_add_title"
@@ -26,6 +30,8 @@
                     android:hint="@string/all_description"
                     app:backgroundTint="@color/colorDarkerGray"
                     style="@style/NoteEditTextDescriptionStyle"/>
+
+
         </LinearLayout>
 
     </com.shengbojia.notes.ui.FixedFocusScrollView>

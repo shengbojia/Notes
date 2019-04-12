@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import com.shengbojia.notes.R
 import com.shengbojia.notes.adapter.NoteAdapter
+import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.viewmodel.DeleteNoteViewModel
 import com.shengbojia.notes.viewmodel.NoteListViewModel
 
@@ -17,6 +18,10 @@ class MainActionModeCallback(
     private val viewModel: DeleteNoteViewModel,
     private val startContext: AppCompatActivity
 ) : ActionMode.Callback {
+
+    internal var selectedNotes = hashSetOf<Note>()
+
+    internal var selectedCount = 0
 
     internal lateinit var adapter: NoteAdapter
 
@@ -41,6 +46,8 @@ class MainActionModeCallback(
         return when (item?.itemId) {
             R.id.contextAction_delete -> {
                 Log.d(TAG, "pressed delete")
+                viewModel.deleteNotes(selectedNotes)
+                selectedNotes = hashSetOf()
                 mode?.finish()
                 true
             }

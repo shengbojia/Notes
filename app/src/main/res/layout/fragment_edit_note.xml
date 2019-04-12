@@ -19,7 +19,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <EditText
-                    android:id="@+id/et_add_title"
+                    android:id="@+id/et_edit_dummy"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+            <EditText
+                    android:id="@+id/et_edit_title"
                     android:text="@{viewModel.note.title}"
                     tools:text="@string/all_title"
                     android:imeOptions="actionDone"
@@ -27,11 +31,13 @@
                     style="@style/NoteEditTextTitleStyle"/>
 
             <EditText
-                    android:id="@+id/et_add_desc"
+                    android:id="@+id/et_edit_desc"
                     android:text="@{viewModel.note.description}"
                     app:backgroundTint="@color/colorDarkerGray"
                     tools:text="Howdy\npartner"
                     style="@style/NoteEditTextDescriptionStyle"/>
+
+
 
         </LinearLayout>
 

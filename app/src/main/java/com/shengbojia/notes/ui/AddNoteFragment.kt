@@ -51,7 +51,6 @@ class AddNoteFragment : Fragment() {
         when (item.itemId) {
             R.id.save_note -> {
                 saveNewNote()
-                findNavController().navigateUp()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -75,9 +74,11 @@ class AddNoteFragment : Fragment() {
             )
         )
 
-        ViewUtils.hideSoftKeyboard(activity)
+        ViewUtils.hideSoftKeyboard(activity, view)
 
         Toast.makeText(activity, getString(R.string.toast_savedSuccess), Toast.LENGTH_SHORT).show()
+
+        ViewUtils.exitFocus(binding.etAddDummy)
     }
 
 

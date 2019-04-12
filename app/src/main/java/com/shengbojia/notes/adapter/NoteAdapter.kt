@@ -1,23 +1,17 @@
 package com.shengbojia.notes.adapter
 
-import android.content.Context
-import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.shengbojia.notes.R
 import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.databinding.ItemNotesBinding
 import com.shengbojia.notes.ui.NoteListFragmentDirections
 import com.shengbojia.notes.ui.actionmode.MainActionModeCallback
-import kotlinx.android.synthetic.main.item_notes.view.*
 
 /**
  * Adapter for the [RecyclerView] in [MainActivity]
@@ -63,7 +57,8 @@ class NoteAdapter(
 
     private fun actionModeClickListener(holder: NoteHolder) = View.OnClickListener {
         Log.d(TAG, "Action click")
-        holder.setCheckBox()
+
+        holder.changeCheckBox(actionModeCallback.selectedNotes)
     }
 
     private fun createOnLongClickListener(holder: NoteHolder): View.OnLongClickListener {
@@ -73,7 +68,7 @@ class NoteAdapter(
             inActionMode = true
             holder.updateOnClick(actionModeClickListener(holder))
             actionModeCallback.startActionMode(it)
-            holder.setCheckBox()
+            holder.changeCheckBox(actionModeCallback.selectedNotes)
             notifyDataSetChanged()
             true
         }
@@ -107,9 +102,21 @@ class NoteAdapter(
             binding.executePendingBindings()
         }
 
-        fun setCheckBox() {
+        fun changeCheckBox(selectedSoFar: HashSet<Note>) {
+
             binding.apply {
-                checkboxNoteSelector.isChecked = !(checkboxNoteSelector.isChecked)
+                if (checkboxNoteSelector.isChecked) {
+
+                    if (!selectedSoFar.remove(note)) {
+                        Log.d(TAG, "Nothing got removed from the set of selected, wack")
+                    }
+                    checkboxNoteSelector.isChecked = false
+
+                } else {
+                    selectedSoFar.add(note ?: throw Exception("note not yet bound when doing checkbox"))
+
+                    checkboxNoteSelector.isChecked = true
+                }
             }
         }
 
