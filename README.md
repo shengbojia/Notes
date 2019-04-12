@@ -35,17 +35,17 @@ Things you can do with Notes:
 
 ### Add a new Note
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/26352502/54404054-a51b7180-46a8-11e9-9a83-606bce51ea0c.gif" alt="Add a Note">
+  <img src="https://user-images.githubusercontent.com/26352502/56068112-a1344b00-5d4b-11e9-9518-27b01131bbfc.gif" alt="Add a Note">
 </p>
 
 ### Open and view a Note
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/26352502/54402838-08ef6b80-46a4-11e9-8792-83dde17ed0b3.gif" alt="Open a Note">
+  <img src="https://user-images.githubusercontent.com/26352502/56067690-16068580-5d4a-11e9-85d1-8538b64ad620.gif" alt="Open a Note">
 </p>
 
 ### Edit an existing Note
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/26352502/54403855-f119e680-46a7-11e9-8022-45ebcb189fb3.gif" alt="Edit a Note">
+  <img src="https://user-images.githubusercontent.com/26352502/56067914-ee63ed00-5d4a-11e9-97ec-fdd7a1ee1e16.gif" alt="Edit a Note">
 </p>
 
 ## Libraries Used
