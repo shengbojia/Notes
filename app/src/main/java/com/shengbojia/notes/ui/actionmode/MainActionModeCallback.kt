@@ -11,21 +11,17 @@ import com.shengbojia.notes.R
 import com.shengbojia.notes.adapter.NoteAdapter
 import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.viewmodel.DeleteNoteViewModel
-import com.shengbojia.notes.viewmodel.NoteListViewModel
+import kotlin.Exception
 
-
+/**
+ * [ActionMode.Callback] that handles the user's request to delete notes.
+ */
 class MainActionModeCallback(
     private val viewModel: DeleteNoteViewModel,
     private val startContext: AppCompatActivity
 ) : ActionMode.Callback {
 
-    internal var selectedNotes = hashSetOf<Note>()
-
-    internal var selectedCount = 0
-
     internal lateinit var adapter: NoteAdapter
-
-    private var multiselect = false
 
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         mode?.menuInflater?.inflate(R.menu.menu_contexual, menu)
@@ -34,9 +30,12 @@ class MainActionModeCallback(
     }
 
     override fun onDestroyActionMode(mode: ActionMode?) {
-        selectedNotes = hashSetOf()
+
+        // Essentially make the selected notes set empty
+        resetDelete()
+
+        // Notifies the adapter that action mode has been exited
         adapter.turnOffActionMode()
-        adapter.notifyDataSetChanged()
     }
 
     override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
@@ -47,8 +46,12 @@ class MainActionModeCallback(
         return when (item?.itemId) {
             R.id.contextAction_delete -> {
                 Log.d(TAG, "pressed delete")
-                viewModel.deleteNotes(selectedNotes)
-                selectedNotes = hashSetOf()
+
+                // TODO: Dialog for confirmation
+                viewModel.deleteNotes()
+                resetDelete()
+
+                // Call onDestroyActionMode
                 mode?.finish()
                 true
             }
@@ -57,12 +60,24 @@ class MainActionModeCallback(
 
     }
 
-    private fun handleDelete() {
-
+    /**
+     * Starts the action mode from the activity context reference.
+     */
+    fun startActionMode(): ActionMode {
+        return startContext.startSupportActionMode(this) ?: throw Exception("Action mode is null")
     }
 
-    fun startActionMode(view: View) {
-        startContext.startSupportActionMode(this)
+    fun addNoteToBeDeleted(note: Note?) {
+        viewModel.notesToDelete.add(note ?: throw Exception(""))
+    }
+
+    fun removeNoteToBeDeleted(note: Note?): Boolean {
+        return viewModel.notesToDelete.remove(note)
+    }
+
+    private fun resetDelete() {
+        viewModel.notesToDelete.clear()
+
     }
 
 
@@ -70,3 +85,4 @@ class MainActionModeCallback(
         private const val TAG = "CallbackActionMode"
     }
 }
+

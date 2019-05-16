@@ -1,10 +1,12 @@
 package com.shengbojia.notes.adapter
 
+import android.drm.DrmStore
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.ActionMode
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,10 +19,11 @@ import com.shengbojia.notes.ui.actionmode.MainActionModeCallback
  * Adapter for the [RecyclerView] in [MainActivity]
  */
 class NoteAdapter(
-    private val actionModeCallback: MainActionModeCallback
+    internal val actionModeCallback: MainActionModeCallback
 ) : ListAdapter<Note, NoteAdapter.NoteHolder>(NoteDiffCallBack()) {
 
     private var inActionMode = false
+    private lateinit var actionMode: ActionMode
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder =
         NoteHolder(ItemNotesBinding.inflate(
@@ -34,9 +37,9 @@ class NoteAdapter(
                 this.itemView.tag = it
                 makeCheckboxVisible(inActionMode)
                 if (inActionMode) {
-                    bind(actionModeClickListener(this), createOnLongClickListener(holder), it)
+                    bind(actionModeClickListener(this), createOnLongClickListener(this), it)
                 } else {
-                    bind(createOnClickListener(it.id), createOnLongClickListener(holder), it)
+                    bind(createOnClickListener(it.id), createOnLongClickListener(this), it)
                 }
             }
         }
@@ -58,24 +61,26 @@ class NoteAdapter(
     private fun actionModeClickListener(holder: NoteHolder) = View.OnClickListener {
         Log.d(TAG, "Action click")
 
-        holder.changeCheckBox(actionModeCallback.selectedNotes)
+        holder.changeCheckBox(actionModeCallback)
     }
 
     private fun createOnLongClickListener(holder: NoteHolder): View.OnLongClickListener {
 
         return View.OnLongClickListener {
             Log.d(TAG, "Long pressed")
-            inActionMode = true
+
             holder.updateOnClick(actionModeClickListener(holder))
-            actionModeCallback.startActionMode(it)
-            holder.changeCheckBox(actionModeCallback.selectedNotes)
-            notifyDataSetChanged()
+            actionMode = actionModeCallback.startActionMode()
+            inActionMode = true
+            notifyItemRangeChanged(0, itemCount)
+            holder.changeCheckBox(actionModeCallback)
             true
         }
     }
 
     internal fun turnOffActionMode() {
         inActionMode = false
+        notifyItemRangeChanged(0, itemCount)
     }
 
 
@@ -97,34 +102,29 @@ class NoteAdapter(
             binding.executePendingBindings()
         }
 
-        fun bindLongClick(longListener: View.OnLongClickListener) {
-            binding.longClickListener = longListener
-            binding.executePendingBindings()
-        }
-
-        fun changeCheckBox(selectedSoFar: HashSet<Note>) {
+        fun changeCheckBox(actionModeCallback: MainActionModeCallback) {
 
             binding.apply {
                 if (checkboxNoteSelector.isChecked) {
 
-                    if (!selectedSoFar.remove(note)) {
+                    if (!actionModeCallback.removeNoteToBeDeleted(note)) {
                         Log.d(TAG, "Nothing got removed from the set of selected, wack")
                     }
                     checkboxNoteSelector.isChecked = false
 
                 } else {
-                    selectedSoFar.add(note ?: throw Exception("note not yet bound when doing checkbox"))
+                    actionModeCallback.addNoteToBeDeleted(note ?: throw Exception("note not yet bound when doing checkbox"))
 
                     checkboxNoteSelector.isChecked = true
                 }
             }
         }
 
-        fun makeCheckboxVisible(visible: Boolean) {
-            if (visible) {
+        fun makeCheckboxVisible(shouldBeVisible: Boolean) {
+            if (shouldBeVisible) {
                 binding.checkboxNoteSelector.visibility = View.VISIBLE
 
-            } else if (!visible) {
+            } else if (!shouldBeVisible) {
                 binding.checkboxNoteSelector.isChecked = false
                 binding.checkboxNoteSelector.visibility = View.GONE
             }

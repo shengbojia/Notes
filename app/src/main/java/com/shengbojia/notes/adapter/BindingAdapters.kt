@@ -28,7 +28,7 @@ fun bindWrittenDate(view: TextView, dateWritten: Calendar?) {
 
     val dateFormat = when (dateRelativeToCalendar(date, currentTime)) {
         DateStatus.NOTHING -> DateFormat.getDateInstance(DateFormat.LONG)
-        DateStatus.SAME_YEAR -> DateRegexUtil.getLongDateInstanceWithoutYears()
+        DateStatus.SAME_YEAR -> DateRegexUtil.removeYears(DateFormat.getDateInstance(DateFormat.LONG))
         DateStatus.SAME_WEEK -> SimpleDateFormat("EEEE", Locale.getDefault())
     }
 

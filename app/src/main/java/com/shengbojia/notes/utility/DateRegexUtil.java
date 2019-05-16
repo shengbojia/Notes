@@ -13,9 +13,9 @@ public class DateRegexUtil {
      *
      * @return DateFormat without year
      */
-    public static DateFormat getLongDateInstanceWithoutYears() {
+    public static DateFormat removeYears(DateFormat dateFormat) {
         try {
-            SimpleDateFormat sdf = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.LONG);
+            SimpleDateFormat sdf = (SimpleDateFormat) dateFormat;
             sdf.applyPattern(sdf.toPattern()
                     .replaceAll(
                             "([^\\p{Alpha}']|('[\\p{Alpha}]+'))*y+([^\\p{Alpha}']|('[\\p{Alpha}]+'))*",
@@ -25,7 +25,7 @@ public class DateRegexUtil {
                             ""));
             return sdf;
         } catch (Exception ex) {
-            return DateFormat.getDateInstance(DateFormat.LONG);
+            return dateFormat;
         }
 
     }
