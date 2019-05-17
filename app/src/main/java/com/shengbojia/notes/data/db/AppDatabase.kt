@@ -1,4 +1,4 @@
-package com.shengbojia.notes.data
+package com.shengbojia.notes.data.db
 
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.Database
@@ -7,11 +7,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import android.content.Context
-import android.os.AsyncTask
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.worker.PopulateDatabaseWorker
-import java.lang.IllegalStateException
 
 /**
  * Room database for the app.
@@ -29,7 +28,8 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase =
                 INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+                    INSTANCE
+                        ?: buildDatabase(context).also { INSTANCE = it }
                 }
 
         private fun buildDatabase(context: Context): AppDatabase =

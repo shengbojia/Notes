@@ -1,4 +1,4 @@
-package com.shengbojia.notes.data
+package com.shengbojia.notes.data.db
 
 import androidx.room.TypeConverter
 import java.util.Calendar

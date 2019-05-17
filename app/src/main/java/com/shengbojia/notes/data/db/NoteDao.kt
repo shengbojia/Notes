@@ -1,8 +1,7 @@
-package com.shengbojia.notes.data
+package com.shengbojia.notes.data.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-
+import com.shengbojia.notes.data.Note
 
 /**
  * The Data Access Object for the [Note] class.

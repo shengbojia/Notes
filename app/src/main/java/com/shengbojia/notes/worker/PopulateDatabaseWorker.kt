@@ -5,9 +5,8 @@ import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.shengbojia.notes.data.AppDatabase
+import com.shengbojia.notes.data.db.AppDatabase
 import com.shengbojia.notes.data.Note
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

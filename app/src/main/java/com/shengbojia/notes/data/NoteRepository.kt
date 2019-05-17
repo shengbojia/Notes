@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.shengbojia.notes.data.Result.Success
 import com.shengbojia.notes.data.Result.Error
+import com.shengbojia.notes.data.db.NoteDao
 
 
 /**
