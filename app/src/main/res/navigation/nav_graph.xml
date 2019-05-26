@@ -6,38 +6,34 @@
             app:startDestination="@+id/noteListFragment">
 
     <fragment android:id="@+id/noteListFragment"
-              android:name="com.shengbojia.notes.ui.NoteListFragment"
+              android:name="com.shengbojia.notes.notelist.NoteListFragment"
               android:label="@string/app_name"
               tools:layout="@layout/fragment_note_list">
 
-        <action android:id="@+id/action_noteListFragment_to_editNoteFragment"
-                app:destination="@id/editNoteFragment"
-                app:enterAnim="@anim/expand_open"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_noteListFragment_to_addEditNoteFragment"
+                app:destination="@id/addEditNoteFragment"/>
 
-        <action android:id="@+id/action_noteListFragment_to_addNoteFragment"
-                app:enterAnim="@anim/expand_from_corner"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"
-                app:destination="@id/addNoteFragment"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"/>
-
-    </fragment>
-
-    <fragment android:id="@+id/editNoteFragment"
-              android:name="com.shengbojia.notes.ui.EditNoteFragment"
-              android:label="@string/fragment_title_editNote"
-              tools:layout="@layout/fragment_edit_note">
-        <argument
-                android:name="noteId"
-                app:argType="integer"/>
     </fragment>
 
     <fragment
-            android:id="@+id/addNoteFragment"
-            android:name="com.shengbojia.notes.ui.AddNoteFragment"
-            android:label="@string/fragment_title_addNote"
-            tools:layout="@layout/fragment_add_note"/>
+            android:id="@+id/addEditNoteFragment"
+            android:name="com.shengbojia.notes.notedetail.AddEditNoteFragment"
+            android:label="{frag_title}"
+            tools:layout="@layout/fragment_add_edit_note">
+
+        <argument
+                android:name="note_id"
+                app:argType="string"
+                app:nullable="true"/>
+
+        <argument
+                android:name="frag_title"
+                app:argType="string"
+                app:nullable="false"/>
+
+        <action
+                android:id="@+id/action_addEditNoteFragment_to_noteListFragment"
+                app:destination="@id/noteListFragment"
+                app:popUpTo="@id/noteListFragment"/>
+    </fragment>
 </navigation>

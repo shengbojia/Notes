@@ -26,4 +26,12 @@
 
     <string name="action_save">Save</string>
     <string name="contextAction_delete">Delete selected</string>
+
+    <string name="snackbar_error_loading">Error while loading notes.</string>
+    <string name="snackbar_error_delete">Error while deleting notes.</string>
+
+    <string name="snackbar_success_deleteAll">All notes deleted.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

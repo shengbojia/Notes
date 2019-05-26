@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.shengbojia.notes.ui.MainActivity">
+      tools:context="com.shengbojia.notes.MainActivity">
     <item android:id="@+id/action_deleteAll"
           android:title="@string/action_deleteAll"
           android:orderInCategory="100"
