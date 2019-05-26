@@ -1,4 +1,4 @@
-package com.shengbojia.notes.ui
+package com.shengbojia.notes.notedetail
 
 import android.annotation.TargetApi
 import android.content.Context

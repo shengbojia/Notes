@@ -1,4 +1,4 @@
-package com.shengbojia.notes.ui
+package com.shengbojia.notes
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

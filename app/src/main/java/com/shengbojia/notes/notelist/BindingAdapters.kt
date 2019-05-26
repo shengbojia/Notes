@@ -1,4 +1,4 @@
-package com.shengbojia.notes.adapter
+package com.shengbojia.notes.notelist
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

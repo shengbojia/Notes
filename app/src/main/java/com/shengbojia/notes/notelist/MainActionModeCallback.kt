@@ -1,16 +1,12 @@
-package com.shengbojia.notes.ui.actionmode
+package com.shengbojia.notes.notelist
 
-import android.content.Context
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import com.shengbojia.notes.R
-import com.shengbojia.notes.adapter.NoteAdapter
 import com.shengbojia.notes.data.Note
-import com.shengbojia.notes.viewmodel.DeleteNoteViewModel
 import kotlin.Exception
 
 /**

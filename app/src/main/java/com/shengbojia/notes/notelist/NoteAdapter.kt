@@ -1,6 +1,5 @@
-package com.shengbojia.notes.adapter
+package com.shengbojia.notes.notelist
 
-import android.drm.DrmStore
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,22 +12,24 @@ import androidx.recyclerview.widget.ListAdapter
 import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.databinding.ItemNotesBinding
 import com.shengbojia.notes.ui.NoteListFragmentDirections
-import com.shengbojia.notes.ui.actionmode.MainActionModeCallback
+import com.shengbojia.notes.viewmodel.NoteListViewModel
 
 /**
  * Adapter for the [RecyclerView] in [MainActivity]
  */
 class NoteAdapter(
-    internal val actionModeCallback: MainActionModeCallback
+    private val noteListViewModel: NoteListViewModel
 ) : ListAdapter<Note, NoteAdapter.NoteHolder>(NoteDiffCallBack()) {
 
     private var inActionMode = false
     private lateinit var actionMode: ActionMode
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder =
-        NoteHolder(ItemNotesBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        ))
+        NoteHolder(
+            ItemNotesBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
         val note = getItem(position)
@@ -48,7 +49,7 @@ class NoteAdapter(
     /**
      * Creates an on click listener that opens up a [EditNoteFragment] on click
      */
-    private fun createOnClickListener(noteId: Int?): View.OnClickListener {
+    private fun createOnClickListener(noteId: String): View.OnClickListener {
         if (noteId != null) {
             return View.OnClickListener {
                 Log.d(TAG, "You pressed note $noteId")
@@ -149,3 +150,4 @@ private class NoteDiffCallBack : DiffUtil.ItemCallback<Note>() {
         return oldItem == newItem
     }
 }
+
