@@ -58,7 +58,7 @@ class NoteRepository private constructor(
      * @return a [Success] of 1 if successful, [Error] otherwise
      */
     @WorkerThread
-    override suspend fun delete(noteId: Int): Result<Int> = withContext(Dispatchers.IO) {
+    override suspend fun delete(noteId: String): Result<Int> = withContext(Dispatchers.IO) {
         try {
             val rowsAffected = noteDao.delete(noteId)
             when (rowsAffected) {
@@ -97,7 +97,7 @@ class NoteRepository private constructor(
      * @return [Success] of selected note, [Error] otherwise
      */
     @WorkerThread
-    override suspend fun getNote(noteId: Int): Result<Note> = withContext(Dispatchers.IO) {
+    override suspend fun getNote(noteId: String): Result<Note> = withContext(Dispatchers.IO) {
         try {
             val result = noteDao.getNote(noteId)
             if (result != null) {

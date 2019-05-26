@@ -33,7 +33,7 @@ interface NoteDao {
      * @return the number of notes deleted. Should be 1
      */
     @Query("DELETE FROM note_table WHERE id = :noteId")
-    fun delete(noteId: Int): Int
+    fun delete(noteId: String): Int
 
     /**
      * Delete all notes in the database.
@@ -50,7 +50,7 @@ interface NoteDao {
      * @return the selected note
      */
     @Query("SELECT * FROM note_table WHERE id = :noteId")
-    fun getNote(noteId: Int): Note?
+    fun getNote(noteId: String): Note?
 
     /**
      * Select all notes from note_table.

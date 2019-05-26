@@ -19,7 +19,7 @@ import java.util.*
     indices = [Index("id")]
 )
 data class Note(
-    @PrimaryKey(autoGenerate = true) var id: Int? = null,
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val title: String,
     val description: String,
     @ColumnInfo(name = "date_written") val dateWritten: Calendar? = Calendar.getInstance()
