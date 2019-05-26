@@ -1,5 +1,6 @@
 package com.shengbojia.notes.viewmodel
 
+/*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -42,3 +43,5 @@ class EditNoteViewModel internal constructor(
         }
     }
 }
+
+*/
