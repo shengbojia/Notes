@@ -19,8 +19,13 @@ import java.util.*
     indices = [Index("id")]
 )
 data class Note(
-    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val title: String,
     val description: String,
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     @ColumnInfo(name = "date_written") val dateWritten: Calendar? = Calendar.getInstance()
-)
+
+) {
+    fun isEmpty(): Boolean {
+        return title.isEmpty() || description.isEmpty()
+    }
+}

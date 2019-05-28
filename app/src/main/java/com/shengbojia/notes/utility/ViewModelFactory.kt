@@ -1,8 +1,10 @@
-package com.shengbojia.notes.viewmodel
+package com.shengbojia.notes.utility
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.shengbojia.notes.data.Repository
+import com.shengbojia.notes.noteaddedit.AddEditViewModel
+import com.shengbojia.notes.notelist.NoteListViewModel
 import java.lang.IllegalArgumentException
 
 

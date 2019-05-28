@@ -34,7 +34,7 @@ class NoteDaoTest {
     @Test
     fun insertNoteAndGetById() = runBlocking {
         // Given - insert a note in the db
-        val note = Note(title = "title", description = "description")
+        val note = Note("title", "description")
         database.noteDao().insert(note)
 
         // When - get the note by id

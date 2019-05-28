@@ -2,45 +2,65 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".notedetail.AddEditNoteFragment">
+        tools:context=".noteaddedit.AddEditNoteFragment">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable name="viewModel"
-                  type="com.shengbojia.notes.viewmodel.AddEditViewModel"/>
+                  type="com.shengbojia.notes.noteaddedit.AddEditViewModel"/>
 
     </data>
-    <com.shengbojia.notes.notedetail.FixedFocusScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <LinearLayout
-                android:orientation="vertical"
-                android:padding="@dimen/padding_itemNotes_horizontal"
+        <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <EditText
-                    android:id="@+id/et_edit_dummy"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"/>
-            <EditText
-                    android:id="@+id/et_edit_title"
-                    android:text="@{viewModel.note.title}"
-                    tools:text="@string/all_title"
-                    android:imeOptions="actionDone"
-                    app:backgroundTint="@color/colorDarkerGray"
-                    style="@style/NoteEditTextTitleStyle"/>
+                android:layout_height="match_parent">
 
-            <EditText
-                    android:id="@+id/et_edit_desc"
-                    android:text="@{viewModel.note.description}"
-                    app:backgroundTint="@color/colorDarkerGray"
-                    tools:text="Howdy\npartner"
-                    style="@style/NoteEditTextDescriptionStyle"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_itemNotes_horizontal"
+                    android:visibility="@{safeUnbox(viewModel.dataLoading) ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                <EditText
+                        android:id="@+id/et_edit_title"
+                        android:text="@{viewModel.title}"
+                        android:hint="@string/all_title"
+                        tools:text="@string/all_title"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone|flagNoExtractUi"
+                        app:backgroundTint="@color/colorDarkerGray"
+                        style="@style/NoteTitleStyle"/>
 
+                <EditText
+                        android:id="@+id/et_edit_desc"
+                        android:text="@{viewModel.description}"
+                        android:hint="@string/all_description"
+                        app:backgroundTint="@color/colorDarkerGray"
+                        tools:text="Howdy\npartner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_description_et"
+                        style="@style/NoteDescriptionStyle"/>
 
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_addEdit_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:onClick="@{() -> viewModel.saveNote()}"
+                android:layout_margin="@dimen/fab_margin"
+                android:src="@drawable/ic_check_white_24dp"/>
 
-    </com.shengbojia.notes.notedetail.FixedFocusScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>

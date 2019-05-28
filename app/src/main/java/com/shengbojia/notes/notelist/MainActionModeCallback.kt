@@ -1,5 +1,5 @@
 package com.shengbojia.notes.notelist
-
+/*
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -82,3 +82,4 @@ class MainActionModeCallback(
     }
 }
 
+*/

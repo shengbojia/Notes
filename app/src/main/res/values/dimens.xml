@@ -2,6 +2,8 @@
     <dimen name="margin_all_note">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="height_description_et">350dp</dimen>
+
     <dimen name="padding_itemNotes_vertical">16dp</dimen>
     <dimen name="padding_itemNotes_horizontal">8dp</dimen>
 
@@ -15,5 +17,7 @@
 
     <dimen name="textSize_titleList">18sp</dimen>
     <dimen name="textSize_descList">12sp</dimen>
+    
+    <dimen name="size_emptyNotesIcon">96dp</dimen>
 
 </resources>

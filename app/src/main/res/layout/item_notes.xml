@@ -5,11 +5,9 @@
 
     <data>
         <variable
-                name="clickListener"
-                type="android.view.View.OnClickListener"/>
+                name="listener"
+                type="com.shengbojia.notes.notelist.NoteItemUserActionsListener"/>
 
-        <variable name="longClickListener"
-                  type="android.view.View.OnLongClickListener"/>
         <variable
                 name="note"
                 type="com.shengbojia.notes.data.Note"/>
@@ -19,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
-            android:onClick="@{clickListener}"
-            android:onLongClick="@{longClickListener}"
+            android:onClick="@{() -> listener.onNoteClicked(note)}"
+            android:onLongClick="@{() -> listener.onNoteLongClicked(note)}"
             android:layout_marginTop="@dimen/margin_all_note">
 
         <RelativeLayout
@@ -68,13 +66,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
-            <CheckBox
-                    android:id="@+id/checkbox_note_selector"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/tv_note_title"
-                    android:layout_marginEnd="@dimen/margin_all_note"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

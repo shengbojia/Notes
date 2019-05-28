@@ -10,10 +10,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.shengbojia.notes.EventObserver
 import com.shengbojia.notes.R
 import com.shengbojia.notes.databinding.FragmentNoteListBinding
-import com.shengbojia.notes.ui.NoteListFragmentDirections
 import com.shengbojia.notes.utility.obtainViewModel
 import com.shengbojia.notes.utility.setupSnackbar
-import com.shengbojia.notes.viewmodel.NoteListViewModel
 
 /**
  * [NoteListFragment] displays saved notes in a [RecyclerView], and has a [FloatingActionButton] for
@@ -35,22 +33,21 @@ class NoteListFragment : Fragment() {
         }
 
         setHasOptionsMenu(true)
+
+        // Set the fragment as the lifecycle owner
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // Set the fragment as the lifecycle owner
-        binding.lifecycleOwner = this.viewLifecycleOwner
-        setupNavigation()
+        setupSnackbar()
         setupAdapter()
+        setupNavigation()
         setupFab()
 
-        binding.recyclerViewNoteList.adapter = adapter
-
-        // Registers an observer for the LiveData
-        subscribeUi(adapter)
+        binding.viewModel?.getAllNotes()
     }
 
     private fun setupSnackbar() {
@@ -58,9 +55,11 @@ class NoteListFragment : Fragment() {
             view?.setupSnackbar(this, it.snackBarText, Snackbar.LENGTH_SHORT)
         }
         arguments?.let {
-
+            val message = NoteListFragmentArgs.fromBundle(it).userMessage
+            binding.viewModel?.showEditResultMessage(message)
         }
     }
+
     private fun setupFab() {
         binding.fabNoteListNewNote.setOnClickListener {
             navigateToAddNewNote()
@@ -98,10 +97,7 @@ class NoteListFragment : Fragment() {
 
     private fun navigateToExistingNote(noteId: String) {
         val direction =
-            NoteListFragmentDirections.actionNoteListFragmentToAddEditNoteFragment(
-                noteId,
-                getString(R.string.fragment_title_editNote)
-            )
+            NoteListFragmentDirections.actionNoteListFragmentToNoteDetailFragment(noteId)
         findNavController().navigate(direction)
     }
 

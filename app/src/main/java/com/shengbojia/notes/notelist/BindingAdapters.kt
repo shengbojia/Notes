@@ -2,18 +2,21 @@ package com.shengbojia.notes.notelist
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.utility.DateRegexUtil
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Enum class for the different possible relations between two [Date]s.
+ * Binds a livedata list that automatically notifies the [RecyclerView.Adapter] whenever data has changed.
  */
-private enum class DateStatus {
-    SAME_WEEK,
-    SAME_YEAR,
-    NOTHING
+@BindingAdapter("app:items")
+fun setItems(view: RecyclerView, itemsToDisplay: List<Note>) {
+    with(view.adapter as NoteAdapter) {
+        submitList(itemsToDisplay)
+    }
 }
 
 /**
@@ -36,6 +39,15 @@ fun bindWrittenDate(view: TextView, dateWritten: Calendar?) {
 
     view.text = dateText
 
+}
+
+/**
+ * Enum class for the different possible relations between two [Date]s.
+ */
+private enum class DateStatus {
+    SAME_WEEK,
+    SAME_YEAR,
+    NOTHING
 }
 
 /**

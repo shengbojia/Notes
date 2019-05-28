@@ -1,15 +1,13 @@
-package com.shengbojia.notes.viewmodel
+package com.shengbojia.notes.notelist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.shengbojia.notes.Event
 import com.shengbojia.notes.R
 import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.data.Repository
-import com.shengbojia.notes.data.Result
 import com.shengbojia.notes.data.Result.Success
+import com.shengbojia.notes.utility.ADD_EDIT_RESULT_OK
+import com.shengbojia.notes.utility.DELETE_RESULT_OK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -38,6 +36,11 @@ class NoteListViewModel internal constructor(
     private val _snackBarText = MutableLiveData<Event<Int>>()
     val snackBarText: LiveData<Event<Int>> = _snackBarText
 
+    // Whether or not to display "empty notes, write some" message
+    val empty: LiveData<Boolean> = Transformations.map(_notes) {
+        it.isEmpty()
+    }
+
 
     @ExperimentalCoroutinesApi
     override fun onCleared() {
@@ -51,6 +54,13 @@ class NoteListViewModel internal constructor(
 
     fun openNote(noteId: String) {
         _openNoteEvent.value = Event(noteId)
+    }
+
+    fun showEditResultMessage(userMessage: Int) {
+        when (userMessage) {
+            ADD_EDIT_RESULT_OK -> _snackBarText.value = Event(R.string.snackbar_success_saved)
+            DELETE_RESULT_OK -> _snackBarText.value = Event(R.string.snackbar_success_delete)
+        }
     }
 
     fun deleteAllNotes() {

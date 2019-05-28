@@ -51,6 +51,8 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-beta01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     kapt deps.room.compiler
     implementation deps.room.runtime
 
