@@ -11,7 +11,7 @@ import com.shengbojia.notes.data.db.NoteDao
 /**
  * [Repository] for handling data operations.
  */
-class NoteRepository private constructor(
+class NoteRepository internal constructor(
     private val noteDao: NoteDao
 ) : Repository {
 

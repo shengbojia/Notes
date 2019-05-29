@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.shengbojia.notes.data.Repository
 import com.shengbojia.notes.noteaddedit.AddEditViewModel
+import com.shengbojia.notes.notedetail.NoteDetailViewModel
 import com.shengbojia.notes.notelist.NoteListViewModel
 import java.lang.IllegalArgumentException
 
@@ -23,6 +24,8 @@ class ViewModelFactory(
                     AddEditViewModel(repository)
                 isAssignableFrom(NoteListViewModel::class.java) ->
                     NoteListViewModel(repository)
+                isAssignableFrom(NoteDetailViewModel::class.java) ->
+                    NoteDetailViewModel(repository)
                 else ->
                     throw IllegalArgumentException("Unknown viewmodel class: ${modelClass.name}")
             }

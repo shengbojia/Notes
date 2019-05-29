@@ -27,12 +27,12 @@ class NoteDaoTest {
     }
 
     @After
-    fun closeDatabase() {
+    fun cleanDatabase() {
         database.close()
     }
 
     @Test
-    fun insertNoteAndGetById() = runBlocking {
+    fun insert_note_getById() = runBlocking {
         // Given - insert a note in the db
         val note = Note("title", "description")
         database.noteDao().insert(note)
@@ -48,5 +48,85 @@ class NoteDaoTest {
         assertThat(loaded?.title).isEqualTo(note.title)
         assertThat(loaded?.description).isEqualTo(note.description)
         assertThat(loaded?.dateWritten).isEquivalentAccordingToCompareTo(note.dateWritten)
+    }
+
+    @Test
+    fun insert_sameNote_replacesOnConflict() = runBlocking {
+
+        // Given - insert a note
+        val note = Note("title", "description")
+        database.noteDao().insert(note)
+
+        // When - note with same id is inserted
+        val newNote = Note("title2", "description2", note.id)
+        database.noteDao().insert(newNote)
+
+        // Then - newNote should have replaced note
+        val loaded = database.noteDao().getNote(note.id)
+        assertThat(loaded?.title).isEqualTo("title2")
+        assertThat(loaded?.description).isEqualTo("description2")
+        assertThat(loaded?.id).isEqualTo(note.id)
+    }
+
+    @Test
+    fun insert_note_getAllNotes() = runBlocking {
+        // Given - insert a note
+        val note = Note("title", "description")
+        database.noteDao().insert(note)
+
+        // When - get all notes
+        val noteList = database.noteDao().getAllNotes()
+
+        // Then - only 1 note in db and should be the inserted note
+        assertThat(noteList.size).isEqualTo(1)
+        assertThat(noteList[0].title).isEqualTo("title")
+        assertThat(noteList[0].description).isEqualTo("description")
+        assertThat(noteList[0].id).isEqualTo(note.id)
+    }
+
+    @Test
+    fun update_note_getNoteById() = runBlocking {
+        // Given - insert a note
+        val note = Note("title", "description")
+        database.noteDao().insert(note)
+
+        // When - the note is updated
+        val updatedNote = Note("title2", "description2", note.id)
+        database.noteDao().update(updatedNote)
+
+        // Then - the loaded data should contain the same values
+        val loaded = database.noteDao().getNote(note.id)
+        assertThat(loaded?.title).isEqualTo("title2")
+        assertThat(loaded?.description).isEqualTo("description2")
+        assertThat(loaded?.id).isEqualTo(note.id)
+    }
+
+    @Test
+    fun delete_noteById_getAllNotes() = runBlocking {
+
+        // Given - insert a note
+        val note = Note("title", "description")
+        database.noteDao().insert(note)
+
+        // When - delete the note by id
+        database.noteDao().delete(note.id)
+
+        // Then - list of all notes should be empty
+        val noteList = database.noteDao().getAllNotes()
+        assertThat(noteList).isEmpty()
+    }
+
+    @Test
+    fun deleteAllNotes_getAllNotes_dbEmpty() = runBlocking {
+        // Given - insert a note
+        val note = Note("title", "description")
+        database.noteDao().insert(note)
+
+        // When - delete all notes
+        database.noteDao().deleteAllNotes()
+
+        // Then - list of notes should be empty
+        val noteList = database.noteDao().getAllNotes()
+        assertThat(noteList).isEmpty()
     }
 }
