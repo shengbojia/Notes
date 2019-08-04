@@ -1,5 +1,6 @@
 package com.shengbojia.notes.data
 
+import androidx.annotation.VisibleForTesting
 import com.google.common.collect.Lists
 import com.shengbojia.notes.data.Result.Success
 import com.shengbojia.notes.data.Result.Error
@@ -70,5 +71,13 @@ class FakeRepository : Repository {
             return Error(Exception("Fake error"))
         }
         return Success(Lists.newArrayList(fakeData.values))
+    }
+
+    // function for testing that is otherwise private
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun addNotes(vararg notes: Note) {
+        for (note in notes) {
+            fakeData[note.id] = note
+        }
     }
 }
