@@ -6,6 +6,9 @@ import com.shengbojia.notes.data.Result.Success
 import com.shengbojia.notes.data.Result.Error
 import java.lang.Exception
 
+/**
+ * Fake for [Repository]. Didn't use a mock since there is some functionality mocks and stubs can't provide.
+ */
 class FakeRepository : Repository {
 
     private val fakeData = LinkedHashMap<String, Note>()
