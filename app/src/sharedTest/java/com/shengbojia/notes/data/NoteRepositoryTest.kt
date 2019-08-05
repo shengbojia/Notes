@@ -10,6 +10,9 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Instrumented unit test for [NoteRepository].
+ */
 class NoteRepositoryTest {
 
     private lateinit var repository: NoteRepository
