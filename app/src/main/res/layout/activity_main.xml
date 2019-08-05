@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <com.google.android.material.appbar.AppBarLayout
-                android:layout_height="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_main"
                 android:layout_width="match_parent"
-                android:theme="@style/AppTheme.AppBarOverlay">
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ToolbarStyle"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-            <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    android:theme="@style/ToolbarStyle"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <fragment
-                android:id="@+id/nav_host_frag"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?attr/actionBarSize"
-                app:navGraph="@navigation/nav_graph"
-                app:defaultNavHost="true"/>
+    <fragment
+            android:id="@+id/nav_host_frag"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            app:navGraph="@navigation/nav_graph"
+            app:defaultNavHost="true"/>
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-</layout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,14 +2,11 @@ package com.shengbojia.notes
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.shengbojia.notes.R
-import com.shengbojia.notes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -17,14 +14,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        navController = Navigation.findNavController(this, R.id.nav_host_frag)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setContentView(R.layout.activity_main)
 
         // Set up ActionBar
-        setSupportActionBar(binding.toolbarMain)
+        setSupportActionBar(findViewById(R.id.toolbar_main))
+
+        navController = findNavController(R.id.nav_host_frag)
+        appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
+            .build()
+
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
