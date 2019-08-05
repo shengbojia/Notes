@@ -8,6 +8,7 @@ import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.*
 import com.shengbojia.notes.data.Note
 import kotlinx.coroutines.runBlocking
+
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
