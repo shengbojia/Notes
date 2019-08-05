@@ -34,13 +34,14 @@ class NoteListFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        // Set the fragment as the lifecycle owner
-        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        // Set the fragment as the lifecycle owner
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         setupSnackbar()
         setupAdapter()
