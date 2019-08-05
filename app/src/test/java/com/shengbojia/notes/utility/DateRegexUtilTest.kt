@@ -5,6 +5,9 @@ import com.google.common.truth.Truth.*
 import java.text.DateFormat
 import java.util.*
 
+/**
+ * Local unit test for some of the regex utility functions.
+ */
 class DateRegexUtilTest {
 
     @Test

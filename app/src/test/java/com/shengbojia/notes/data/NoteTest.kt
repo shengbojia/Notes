@@ -2,6 +2,9 @@ package com.shengbojia.notes.data
 
 import org.junit.Test
 
+/**
+ * Simple local unit test for [Note].
+ */
 class NoteTest {
 
     @Test

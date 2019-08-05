@@ -15,6 +15,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * Local unit test using a [FakeRepository] for [NoteListViewModel].
+ */
 class NoteListViewModelTest {
 
     // View model to be tested
