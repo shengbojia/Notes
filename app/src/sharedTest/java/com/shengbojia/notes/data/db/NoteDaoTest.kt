@@ -7,12 +7,14 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.*
 import com.shengbojia.notes.data.Note
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class NoteDaoTest {
@@ -33,7 +35,7 @@ class NoteDaoTest {
     }
 
     @Test
-    fun insert_note_getById() = runBlocking {
+    fun insert_note_getById() = runBlockingTest {
         // Given - insert a note in the db
         val note = Note("title", "description")
         database.noteDao().insert(note)
@@ -52,7 +54,7 @@ class NoteDaoTest {
     }
 
     @Test
-    fun insert_sameNote_replacesOnConflict() = runBlocking {
+    fun insert_sameNote_replacesOnConflict() = runBlockingTest {
 
         // Given - insert a note
         val note = Note("title", "description")
@@ -70,7 +72,7 @@ class NoteDaoTest {
     }
 
     @Test
-    fun insert_note_getAllNotes() = runBlocking {
+    fun insert_note_getAllNotes() = runBlockingTest {
         // Given - insert a note
         val note = Note("title", "description")
         database.noteDao().insert(note)
@@ -86,7 +88,7 @@ class NoteDaoTest {
     }
 
     @Test
-    fun update_note_getNoteById() = runBlocking {
+    fun update_note_getNoteById() = runBlockingTest {
         // Given - insert a note
         val note = Note("title", "description")
         database.noteDao().insert(note)
@@ -103,7 +105,7 @@ class NoteDaoTest {
     }
 
     @Test
-    fun delete_noteById_getAllNotes() = runBlocking {
+    fun delete_noteById_getAllNotes() = runBlockingTest {
 
         // Given - insert a note
         val note = Note("title", "description")
@@ -118,7 +120,7 @@ class NoteDaoTest {
     }
 
     @Test
-    fun deleteAllNotes_getAllNotes_dbEmpty() = runBlocking {
+    fun deleteAllNotes_getAllNotes_dbEmpty() = runBlockingTest {
         // Given - insert a note
         val note = Note("title", "description")
         database.noteDao().insert(note)

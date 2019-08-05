@@ -4,8 +4,8 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.shengbojia.notes.data.db.AppDatabase
 import com.shengbojia.notes.data.Result.Success
-import kotlinx.coroutines.runBlocking
 import com.google.common.truth.Truth.*
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -35,7 +35,7 @@ class NoteRepositoryTest {
     }
 
     @Test
-    fun insert_success_resultSuccess() = runBlocking {
+    fun insert_success_resultSuccess() = runBlockingTest {
         // Given - note
         val note = Note("title", "description")
 
@@ -50,7 +50,7 @@ class NoteRepositoryTest {
 
 
     @Test
-    fun insertNote_getById() = runBlocking {
+    fun insertNote_getById() = runBlockingTest {
         // Given - insert a note
         val note = Note("title", "description")
         repository.insert(note)
@@ -69,7 +69,7 @@ class NoteRepositoryTest {
 
 
     @Test
-    fun insertNote_getAllNotes() = runBlocking {
+    fun insertNote_getAllNotes() = runBlockingTest {
         // Given - insert 2 notes
         val note1 = Note("title", "description")
         val note2 = Note("title2", "description2")
