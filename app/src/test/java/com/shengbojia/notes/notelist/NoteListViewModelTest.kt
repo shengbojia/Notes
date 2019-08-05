@@ -2,13 +2,13 @@ package com.shengbojia.notes.notelist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.shengbojia.notes.LiveDataTestUtil
-import com.shengbojia.notes.R
-import com.shengbojia.notes.ViewModelScopeMainDispatcherRule
-import com.shengbojia.notes.assertSnackbarMessage
+import com.shengbojia.notes.*
 import com.shengbojia.notes.data.FakeRepository
 import com.shengbojia.notes.data.Note
+import com.shengbojia.notes.utility.ADD_EDIT_RESULT_OK
+import com.shengbojia.notes.utility.DELETE_RESULT_OK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineContext
 
 import org.junit.Before
@@ -53,11 +53,11 @@ class NoteListViewModelTest {
     }
 
     @Test
-    fun getAllNotesFromRepository_dataLoadingTogglesAndDataLoaded() {
+    fun getAllNotes_dataLoadingTogglesAndDataLoaded() {
         // Given an initialized NoteListViewModel and initialized + inserted notes
 
         // When loading of all notes is requested
-        viewModel.getAllNotes()
+        viewModel.getAllNotes(true)
 
         // Then data loading indicator is shown
         assertThat(LiveDataTestUtil.getValue(viewModel.dataLoading)).isTrue()
@@ -73,12 +73,12 @@ class NoteListViewModelTest {
     }
 
     @Test
-    fun getAllNotesFromRepository_error() {
+    fun getAllNotes_error() {
         // Given repository that will return an error
         fakeRepository.setShouldReturnError(true)
 
         // When loading of all notes is requested
-        viewModel.getAllNotes()
+        viewModel.getAllNotes(true)
 
         // Execute pending coroutine actions
         testContext.triggerActions()
@@ -92,4 +92,85 @@ class NoteListViewModelTest {
         // And snackbar text is updated with correct error message
         assertSnackbarMessage(viewModel.snackBarText, R.string.snackbar_error_loading)
     }
+
+    @Test
+    fun clickOnFab_addNoteEventTriggered() {
+        // When clicking on the fab to add a new note
+        viewModel.addNewNote()
+
+        // Then the add note event is triggered
+        val value = LiveDataTestUtil.getValue(viewModel.newNoteEvent)
+        assertThat(value.getContentIfNotUsed()).isNotNull()
+    }
+
+    @Test
+    fun clickOnOpenNote_openNoteEventTriggered() {
+        // When clicking on a note to open it
+        val noteId = "11"
+        viewModel.openNote(noteId)
+
+        // Then the open note event is triggered
+        assertLiveDataEventTriggered(viewModel.openNoteEvent, noteId)
+    }
+
+    @Test
+    fun deleteAllNotes_clearsNotes() = runBlocking {
+        // When option to delete all notes is selected
+        viewModel.deleteAllNotes()
+
+        // load all notes
+        viewModel.getAllNotes(false)
+
+        // Execute pending coroutine actions
+        testContext.triggerActions()
+
+        // Get all notes
+        val allNotes = LiveDataTestUtil.getValue(viewModel.notes)
+
+        // Then there should be no more notes in the repo
+        assertThat(allNotes).isEmpty()
+
+        // And the snackbar is updated with correct message
+        assertSnackbarMessage(viewModel.snackBarText, R.string.snackbar_success_deleteAll)
+    }
+
+    @Test
+    fun deleteAllNotes_error() = runBlocking {
+
+        // Given repository that will cause an error when trying to delete notes
+        fakeRepository.setShouldReturnError(true)
+
+        // When told to delete all notes
+        viewModel.deleteAllNotes()
+
+        // Execute pending coroutine actions
+        testContext.triggerActions()
+
+        // Then snackbar is updated with correct error message
+        assertSnackbarMessage(viewModel.snackBarText, R.string.snackbar_error_delete)
+
+    }
+
+    @Test
+    fun showEditResultMessage_addEditOk_snackbarUpdated() {
+        // When the viewmodel receives a 'add edit ok' result from another fragment
+        viewModel.showEditResultMessage(ADD_EDIT_RESULT_OK)
+
+        // Then the snackbar is updated with the correct message
+        assertSnackbarMessage(viewModel.snackBarText, R.string.snackbar_success_saved)
+    }
+
+    @Test
+    fun showEditResultMessage_deleteOk_snackbarUpdated() {
+        // When the viewmodel receives a 'delete ok' result from another fragment
+        viewModel.showEditResultMessage(DELETE_RESULT_OK)
+
+        // Then the snackbar is updated with the correct message
+        assertSnackbarMessage(viewModel.snackBarText, R.string.snackbar_success_delete)
+    }
+
+
+
+
+
 }

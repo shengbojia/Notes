@@ -47,7 +47,7 @@ class NoteListFragment : Fragment() {
         setupNavigation()
         setupFab()
 
-        binding.viewModel?.getAllNotes()
+        binding.viewModel?.getAllNotes(true)
     }
 
     private fun setupSnackbar() {

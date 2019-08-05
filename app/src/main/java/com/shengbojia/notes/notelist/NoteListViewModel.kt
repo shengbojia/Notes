@@ -71,11 +71,11 @@ class NoteListViewModel internal constructor(
             } else {
                 _snackBarText.value = Event(R.string.snackbar_error_delete)
             }
-            getAllNotes()
+            getAllNotes(false)
         }
     }
 
-    fun getAllNotes() {
+    fun getAllNotes(showSnackbarMsg: Boolean) {
         _dataLoading.value = true
 
         viewModelScope.launch {
@@ -90,7 +90,9 @@ class NoteListViewModel internal constructor(
                 _isDataLoadingError.value = true
                 _notes.value = emptyList()
 
-                _snackBarText.value = Event(R.string.snackbar_error_loading)
+                if (showSnackbarMsg) {
+                    _snackBarText.value = Event(R.string.snackbar_error_loading)
+                }
             }
 
             _dataLoading.value = false
