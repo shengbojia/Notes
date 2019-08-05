@@ -8,8 +8,7 @@ import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.utility.ADD_EDIT_RESULT_OK
 import com.shengbojia.notes.utility.DELETE_RESULT_OK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineContext
+import kotlinx.coroutines.test.runBlockingTest
 
 import org.junit.Before
 import org.junit.Rule
@@ -18,6 +17,7 @@ import org.junit.Test
 /**
  * Local unit test using a [FakeRepository] for [NoteListViewModel].
  */
+@ExperimentalCoroutinesApi
 class NoteListViewModelTest {
 
     // View model to be tested
@@ -26,13 +26,10 @@ class NoteListViewModelTest {
     // Fake repository, I didn't use a mock here because there's some details to work out
     private lateinit var fakeRepository: FakeRepository
 
-    // CoroutineContext that can be controlled during tests
-    private val testContext = TestCoroutineContext()
-
     // Set the main coroutine dispatcher to be the test one
     @ExperimentalCoroutinesApi
     @get:Rule
-    var coroutineMainDispatcherRule = ViewModelScopeMainDispatcherRule(testContext)
+    var mainCoroutineRule = MainCoroutineRule()
 
     // Swaps background executor used by the Architecture Components with a different
     // one that executes each task synchronously
@@ -57,8 +54,10 @@ class NoteListViewModelTest {
 
     @Test
     fun getAllNotes_dataLoadingTogglesAndDataLoaded() {
-        // Given an initialized NoteListViewModel and initialized + inserted notes
+        // Pause dispatcher to verify initial values
+        mainCoroutineRule.pauseDispatcher()
 
+        // Given an initialized NoteListViewModel and initialized + inserted notes
         // When loading of all notes is requested
         viewModel.getAllNotes(true)
 
@@ -66,7 +65,7 @@ class NoteListViewModelTest {
         assertThat(LiveDataTestUtil.getValue(viewModel.dataLoading)).isTrue()
 
         // Execute pending coroutine actions
-        testContext.triggerActions()
+        mainCoroutineRule.resumeDispatcher()
 
         // Then data loading indicator becomes hidden
         assertThat(LiveDataTestUtil.getValue(viewModel.dataLoading)).isFalse()
@@ -82,9 +81,6 @@ class NoteListViewModelTest {
 
         // When loading of all notes is requested
         viewModel.getAllNotes(true)
-
-        // Execute pending coroutine actions
-        testContext.triggerActions()
 
         // Then data loading error indicator is true
         assertThat(LiveDataTestUtil.getValue(viewModel.isDataLoadingError)).isTrue()
@@ -117,15 +113,12 @@ class NoteListViewModelTest {
     }
 
     @Test
-    fun deleteAllNotes_clearsNotes() = runBlocking {
+    fun deleteAllNotes_clearsNotes() = mainCoroutineRule.runBlockingTest {
         // When option to delete all notes is selected
         viewModel.deleteAllNotes()
 
         // load all notes
         viewModel.getAllNotes(false)
-
-        // Execute pending coroutine actions
-        testContext.triggerActions()
 
         // Get all notes
         val allNotes = LiveDataTestUtil.getValue(viewModel.notes)
@@ -138,16 +131,13 @@ class NoteListViewModelTest {
     }
 
     @Test
-    fun deleteAllNotes_error() = runBlocking {
+    fun deleteAllNotes_error() = mainCoroutineRule.runBlockingTest {
 
         // Given repository that will cause an error when trying to delete notes
         fakeRepository.setShouldReturnError(true)
 
         // When told to delete all notes
         viewModel.deleteAllNotes()
-
-        // Execute pending coroutine actions
-        testContext.triggerActions()
 
         // Then snackbar is updated with correct error message
         assertSnackbarMessage(viewModel.snackBarText, R.string.snackbar_error_delete)
