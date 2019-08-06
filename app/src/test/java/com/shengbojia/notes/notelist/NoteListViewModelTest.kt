@@ -162,8 +162,4 @@ class NoteListViewModelTest {
         assertSnackbarMessage(viewModel.snackBarText, R.string.snackbar_success_delete)
     }
 
-
-
-
-
 }

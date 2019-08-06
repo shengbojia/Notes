@@ -8,6 +8,7 @@ import androidx.navigation.Navigation
 import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -109,5 +110,55 @@ class NoteListFragmentTest {
         // Then verify that the note was deleted
         onView(withText("title1")).check(doesNotExist())
 
+    }
+
+    @Test
+    fun deleteOneFromMultipleNotes() {
+        // Given a repository with 3 notes inserted
+        repository.insertNoteBlocking(Note("toDel", "descDel"))
+        repository.insertNoteBlocking(Note("title1", "desc1"))
+        repository.insertNoteBlocking(Note("title2", "desc2"))
+
+        launch(MainActivity::class.java)
+
+        // When the one to delete is opened and then deleted
+        onView(withText("toDel")).perform(click())
+        onView(withId(R.id.action_delete)).perform(click())
+
+         // Then verify that note is deleted
+        onView(withText("toDel")).check(doesNotExist())
+
+        // And the other two notes are still there
+        onView(withText("title1")).check(matches(isDisplayed()))
+        onView(withText("title2")).check(matches(isDisplayed()))
+    }
+
+    /*
+    Test fails, but manual testing shows that the notes are not visible after deleting and yet Espresso is saying that
+    they are there and visible. Probably has to do with the Recyclerview not clearing its views from the hierarchy.
+     */
+    @Test
+    fun deleteAllNotesFromMenuOption() {
+        // Given a repository with 2 notes inserted
+        repository.insertNoteBlocking(Note("title1", "desc1"))
+        repository.insertNoteBlocking(Note("title2", "desc2"))
+
+        launch(MainActivity::class.java)
+
+        // When the option to delete all is clicked from the menu
+        openActionBarOverflowOrOptionsMenu(getApplicationContext())
+        onView(withText(R.string.action_deleteAll)).perform(click())
+
+        // TODO: it does appear that recyclerview is maintaining the views until a fragment change
+        // very clunky way trying to pop the fragment stack and see if the recyclerview refreshes
+        repository.insertNoteBlocking(Note("refresh", "the screen"))
+        openActionBarOverflowOrOptionsMenu(getApplicationContext())
+        onView(withText(R.string.action_refresh)).perform(click())
+        onView(withText("refresh")).perform(click())
+        onView(withId(R.id.action_delete)).perform(click())
+
+        // Then both notes should be deleted
+        onView(withText("title1")).check(doesNotExist())
+        onView(withText("title2")).check(doesNotExist())
     }
 }

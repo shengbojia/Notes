@@ -113,6 +113,10 @@ class NoteListFragment : Fragment() {
                 Log.d(TAG, "Deleted all")
                 true
             }
+            R.id.action_refresh -> {
+                binding.viewModel?.getAllNotes(true)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
 
