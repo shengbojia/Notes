@@ -36,7 +36,6 @@ class NoteListViewModelTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-
     @Before
     fun setUpNoteListViewModel() {
 
