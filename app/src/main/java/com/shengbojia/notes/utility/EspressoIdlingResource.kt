@@ -1,16 +1,16 @@
-package com.shengbojia.notes.utility.idling
+package com.shengbojia.notes.utility
 
-import androidx.test.espresso.IdlingResource
+import androidx.test.espresso.idling.CountingIdlingResource
 
 /**
- * Contains a static reference to [IdlingResource], only available in the 'mock' build type. Some of my UI tests are
- * failing because Espresso is
+ * Contains a static reference to [CountingIdlingResource], only available in the 'mock' build type. Determines idleness
+ * by maintaining a counter. When the counter is 0 - it is considered to be idle, when it is non-zero it is not idle
  */
 object EspressoIdlingResource {
 
     private const val RESOURCE = "GLOBAL"
 
-    @JvmField val countingIdlingResource = SimpleCountingIdlingResource(RESOURCE)
+    @JvmField val countingIdlingResource = CountingIdlingResource(RESOURCE)
 
     fun increment() {
         countingIdlingResource.increment()
