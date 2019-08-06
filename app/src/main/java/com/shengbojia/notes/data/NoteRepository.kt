@@ -6,13 +6,15 @@ import kotlinx.coroutines.withContext
 import com.shengbojia.notes.data.Result.Success
 import com.shengbojia.notes.data.Result.Error
 import com.shengbojia.notes.data.db.NoteDao
+import kotlinx.coroutines.CoroutineDispatcher
 
 
 /**
  * [Repository] for handling data operations.
  */
 class NoteRepository internal constructor(
-    private val noteDao: NoteDao
+    private val noteDao: NoteDao,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : Repository {
 
     /**
@@ -22,7 +24,7 @@ class NoteRepository internal constructor(
      * @return a [Success] of true if successful, [Error] otherwise
      */
     @WorkerThread
-    override suspend fun insert(note: Note): Result<Boolean> = withContext(Dispatchers.IO) {
+    override suspend fun insert(note: Note): Result<Boolean> = withContext(ioDispatcher) {
         try {
             noteDao.insert(note)
             return@withContext Success<Boolean>(true)
@@ -38,7 +40,7 @@ class NoteRepository internal constructor(
      * @return a [Success] of 1 if successful, [Error] otherwise
      */
     @WorkerThread
-    override suspend fun update(note: Note): Result<Int> = withContext(Dispatchers.IO) {
+    override suspend fun update(note: Note): Result<Int> = withContext(ioDispatcher) {
         try {
             val rowsAffected = noteDao.update(note)
             when (rowsAffected) {
@@ -58,7 +60,7 @@ class NoteRepository internal constructor(
      * @return a [Success] of 1 if successful, [Error] otherwise
      */
     @WorkerThread
-    override suspend fun delete(noteId: String): Result<Int> = withContext(Dispatchers.IO) {
+    override suspend fun delete(noteId: String): Result<Int> = withContext(ioDispatcher) {
         try {
             val rowsAffected = noteDao.delete(noteId)
             when (rowsAffected) {
@@ -77,7 +79,7 @@ class NoteRepository internal constructor(
      * @return a [Success] of the total number of rows affected, [Error] otherwise
      */
     @WorkerThread
-    override suspend fun deleteAllNotes(): Result<Int> = withContext(Dispatchers.IO) {
+    override suspend fun deleteAllNotes(): Result<Int> = withContext(ioDispatcher) {
         try {
             val rowsAffected = noteDao.deleteAllNotes()
             when (rowsAffected) {
@@ -97,7 +99,7 @@ class NoteRepository internal constructor(
      * @return [Success] of selected note, [Error] otherwise
      */
     @WorkerThread
-    override suspend fun getNote(noteId: String): Result<Note> = withContext(Dispatchers.IO) {
+    override suspend fun getNote(noteId: String): Result<Note> = withContext(ioDispatcher) {
         try {
             val result = noteDao.getNote(noteId)
             if (result != null) {
@@ -116,7 +118,7 @@ class NoteRepository internal constructor(
      * @return [Success] of list of [Note]s, [Error] otherwise
      */
     @WorkerThread
-    override suspend fun getAllNotes(): Result<List<Note>> = withContext(Dispatchers.IO) {
+    override suspend fun getAllNotes(): Result<List<Note>> = withContext(ioDispatcher) {
         try {
             return@withContext Success<List<Note>>(noteDao.getAllNotes())
         } catch (ex: Exception) {
