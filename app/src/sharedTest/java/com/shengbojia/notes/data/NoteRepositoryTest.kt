@@ -18,7 +18,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Instrumented unit test for [NoteRepository].
+ * Instrumented unit test for [NoteRepository]. Can be run on Robolectric too thought.
  */
 @RunWith(AndroidJUnit4::class)
 @ExperimentalCoroutinesApi
@@ -102,6 +102,51 @@ class NoteRepositoryTest {
     }
 
     @Test
+    fun getNote_emptyDb_resultError() = runBlockingTest {
+        // Given empty db
+
+        // When trying to get a note by id that is not in db
+        val note = Note("not in db", "not in db")
+        val result = repository.getNote(note.id)
+
+        // Then the result will be an error: 'Note not found!'
+        assertThat(result.succeeded).isFalse()
+        result as Result.Error
+        assertThat(result.ex.message).isEqualTo("Note not found!")
+    }
+
+    @Test
+    fun getNote_wrongId_resultError() = runBlockingTest {
+        // Given db with multiple notes
+        repository.insert(Note("title1", "desc1"))
+        repository.insert(Note("title2", "desc2"))
+
+        // When trying to get a note by id that is not in db
+        val note = Note("not in db", "not in db")
+        val result = repository.getNote(note.id)
+
+        // Then the result will be an error: 'Note not found!'
+        assertThat(result.succeeded).isFalse()
+        result as Result.Error
+        assertThat(result.ex.message).isEqualTo("Note not found!")
+    }
+
+    @Test
+    fun getAllNotes_emptyDb_resultEmpty() = runBlockingTest {
+        // Given an empty db
+
+        // When getting all notes
+        val result = repository.getAllNotes()
+
+        // Then the result is success
+        assertThat(result.succeeded).isTrue()
+        result as Success
+
+        // But will contain an empty list
+        assertThat(result.data).isEmpty()
+    }
+
+    @Test
     fun update_resultSuccess() = runBlockingTest {
         // Given - existing note in db
         val note = Note("title", "description")
@@ -137,5 +182,102 @@ class NoteRepositoryTest {
         assertThat(result.data.dateWritten).isEquivalentAccordingToCompareTo(newNote.dateWritten)
     }
 
+    @Test
+    fun delete_resultSuccess_dbEmpty() = runBlockingTest {
+        // Given db with an existing note
+        val note = Note("title", "desc")
+        repository.insert(note)
+
+        // When - delete the note by its id
+        val result = repository.delete(note.id)
+
+        // Then verify the result is a success of 1
+        assertThat(result.succeeded).isTrue()
+        result as Success
+        assertThat(result.data).isEqualTo(1)
+
+        // and db now empty
+        assertThat((repository.getAllNotes() as Success).data).isEmpty()
+    }
+
+    @Test
+    fun delete_oneNoteFromMultiple_onlyOneGetsDeleted() = runBlockingTest {
+        // Given - db with multiple notes
+        val noteToDel = Note("del title", "del desc")
+        repository.insert(Note("title1", "desc1"))
+        repository.insert(Note("title2", "desc2"))
+        repository.insert(noteToDel)
+
+        // When deleting a specific note by id
+        val result = repository.delete(noteToDel.id)
+
+        // Then verify only 1 data table row is affected
+        assertThat(result.succeeded).isTrue()
+        result as Success
+        assertThat(result.data).isEqualTo(1)
+
+        // and other two notes are still there
+        assertThat((repository.getAllNotes() as Success).data).hasSize(2)
+    }
+
+    @Test
+    fun delete_fromEmptyDb_resultError() = runBlockingTest {
+        // Given empty db with no notes
+
+        // When attempting to delete a note
+        val note = Note("title", "desc")
+        val result = repository.delete(note.id)
+
+        // Then the result should be an error saying 'Nothing deleted'
+        assertThat(result.succeeded).isFalse()
+        result as Result.Error
+        assertThat(result.ex.message).isEqualTo("Nothing deleted.")
+    }
+
+    @Test
+    fun delete_noteNotInDb_resultError() = runBlockingTest {
+        // Given db with multiple notes
+        repository.insert(Note("title1", "desc1"))
+        repository.insert(Note("title2", "desc2"))
+
+        // When trying to delete a note that is not in db
+        val noteToDel = Note("del title", "del desc")
+        val result = repository.delete(noteToDel.id)
+
+        // Then the result should be an error saying 'Nothing deleted'
+        assertThat(result.succeeded).isFalse()
+        result as Result.Error
+        assertThat(result.ex.message).isEqualTo("Nothing deleted.")
+    }
+
+    @Test
+    fun deleteAllNotes_fromEmptyDb_resultError() = runBlockingTest {
+        // Given empty db with no notes
+
+        // When trying to delete all notes
+        val result = repository.deleteAllNotes()
+
+        // Then the result should be an error saying 'Nothing deleted'
+        assertThat(result.succeeded).isFalse()
+        result as Result.Error
+        assertThat(result.ex.message).isEqualTo("Nothing deleted.")
+    }
+
+    @Test
+    fun deleteAllNotes_twoNotes_dbEmpty() = runBlockingTest {
+        // Given db with multiple notes
+        repository.insert(Note("title1", "desc1"))
+        repository.insert(Note("title2", "desc2"))
+
+        // When deleting all notes
+        val result = repository.deleteAllNotes()
+
+        // Then the result should be a success
+        assertThat(result.succeeded).isTrue()
+        result as Success
+
+        // And the number of table rows affected should be 2
+        assertThat(result.data).isEqualTo(2)
+    }
 
 }
