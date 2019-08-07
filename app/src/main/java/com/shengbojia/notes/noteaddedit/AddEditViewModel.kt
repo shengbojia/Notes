@@ -12,7 +12,7 @@ import com.shengbojia.notes.data.Result.Success
 import kotlinx.coroutines.launch
 import java.lang.RuntimeException
 
-class AddEditViewModel (
+class AddEditViewModel(
     private val repository: Repository
 ) : ViewModel() {
 
@@ -78,6 +78,7 @@ class AddEditViewModel (
 
     private fun onNoteDataUnavailable() {
         _dataLoading.value = false
+        _snackBarText.value = Event(R.string.snackbar_error_noteMissing)
     }
 
     fun saveNote() {

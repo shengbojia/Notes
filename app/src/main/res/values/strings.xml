@@ -37,4 +37,5 @@
     <string name="noteList_emptyNotesMsg">You have no notes.</string>
     <string name="noteDetail_noData">No data</string>
     <string name="action_refresh">Refresh</string>
+    <string name="snackbar_error_noteMissing">Note not found.</string>
 </resources>
