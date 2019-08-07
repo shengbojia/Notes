@@ -38,7 +38,6 @@ import org.robolectric.annotation.TextLayoutMode
 /**
  * Integration test for the note list title screen.
  */
-
 @RunWith(AndroidJUnit4::class)
 @MediumTest
 @LooperMode(LooperMode.Mode.PAUSED)
