@@ -112,6 +112,9 @@ class NoteListFragmentTest {
         // Then verify that the note was deleted
         onView(withText("title1")).check(doesNotExist())
 
+        // And correct snackbar message pops up
+        onView(withId(R.id.snackbar_text)).check(matches(withText(R.string.snackbar_success_delete)))
+
     }
 
     @Test
@@ -129,6 +132,9 @@ class NoteListFragmentTest {
 
          // Then verify that note is deleted
         onView(withText("toDel")).check(doesNotExist())
+
+        // And correct snackbar message pops up
+        onView(withId(R.id.snackbar_text)).check(matches(withText(R.string.snackbar_success_delete)))
 
         // And the other two notes are still there
         onView(withText("title1")).check(matches(isDisplayed()))
@@ -151,6 +157,9 @@ class NoteListFragmentTest {
         openActionBarOverflowOrOptionsMenu(getApplicationContext())
         onView(withText(R.string.action_deleteAll)).perform(click())
 
+        // Then the correct snackbar message pops up
+        onView(withId(R.id.snackbar_text)).check(matches(withText(R.string.snackbar_success_deleteAll)))
+
         // TODO: it does appear that recyclerview is maintaining the views until a fragment stack pop
         // very clunky way trying to pop the fragment stack and see if the recyclerview refreshes
         repository.insertNoteBlocking(Note("refresh", "the screen"))
@@ -159,7 +168,7 @@ class NoteListFragmentTest {
         onView(withText("refresh")).perform(click())
         onView(withId(R.id.action_delete)).perform(click())
 
-        // Then both notes should be deleted
+        // And both notes should be deleted
         onView(withText("title1")).check(doesNotExist())
         onView(withText("title2")).check(doesNotExist())
     }
