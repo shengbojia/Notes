@@ -38,6 +38,7 @@ class AddEditViewModel (
 
     fun start(noteId: String?) {
         _dataLoading.value?.let { isLoading ->
+            // if already loading, ignore the request
             if (isLoading) return
         }
         this.noteId = noteId

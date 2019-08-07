@@ -2,7 +2,11 @@ package com.shengbojia.notes.notelist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.shengbojia.notes.*
+import com.shengbojia.notes.LiveDataTestUtil.getValue
+import com.shengbojia.notes.MainCoroutineRule
+import com.shengbojia.notes.R
+import com.shengbojia.notes.assertLiveDataEventTriggered
+import com.shengbojia.notes.assertSnackbarMessage
 import com.shengbojia.notes.data.FakeRepository
 import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.utility.ADD_EDIT_RESULT_OK
@@ -48,6 +52,7 @@ class NoteListViewModelTest {
 
         fakeRepository.addNotes(note1, note2, note3)
 
+        // create the viewmodel to be tested
         viewModel = NoteListViewModel(fakeRepository)
     }
 
@@ -61,16 +66,16 @@ class NoteListViewModelTest {
         viewModel.getAllNotes(true)
 
         // Then data loading indicator is shown
-        assertThat(LiveDataTestUtil.getValue(viewModel.dataLoading)).isTrue()
+        assertThat(getValue(viewModel.dataLoading)).isTrue()
 
         // Execute pending coroutine actions
         mainCoroutineRule.resumeDispatcher()
 
         // Then data loading indicator becomes hidden
-        assertThat(LiveDataTestUtil.getValue(viewModel.dataLoading)).isFalse()
+        assertThat(getValue(viewModel.dataLoading)).isFalse()
 
         // And data was correctly loaded
-        assertThat(LiveDataTestUtil.getValue(viewModel.notes)).hasSize(3)
+        assertThat(getValue(viewModel.notes)).hasSize(3)
     }
 
     @Test
@@ -82,10 +87,10 @@ class NoteListViewModelTest {
         viewModel.getAllNotes(true)
 
         // Then data loading error indicator is true
-        assertThat(LiveDataTestUtil.getValue(viewModel.isDataLoadingError)).isTrue()
+        assertThat(getValue(viewModel.isDataLoadingError)).isTrue()
 
         // And list of notes is empty
-        assertThat(LiveDataTestUtil.getValue(viewModel.notes)).isEmpty()
+        assertThat(getValue(viewModel.notes)).isEmpty()
 
         // And snackbar text is updated with correct error message
         assertSnackbarMessage(viewModel.snackBarText, R.string.snackbar_error_loading)
@@ -97,7 +102,7 @@ class NoteListViewModelTest {
         viewModel.addNewNote()
 
         // Then the add note event is triggered
-        val value = LiveDataTestUtil.getValue(viewModel.newNoteEvent)
+        val value = getValue(viewModel.newNoteEvent)
         assertThat(value.getContentIfNotUsed()).isNotNull()
     }
 
@@ -120,7 +125,7 @@ class NoteListViewModelTest {
         viewModel.getAllNotes(false)
 
         // Get all notes
-        val allNotes = LiveDataTestUtil.getValue(viewModel.notes)
+        val allNotes = getValue(viewModel.notes)
 
         // Then there should be no more notes in the repo
         assertThat(allNotes).isEmpty()

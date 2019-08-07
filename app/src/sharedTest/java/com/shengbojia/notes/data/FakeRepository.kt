@@ -2,9 +2,8 @@ package com.shengbojia.notes.data
 
 import androidx.annotation.VisibleForTesting
 import com.google.common.collect.Lists
-import com.shengbojia.notes.data.Result.Success
 import com.shengbojia.notes.data.Result.Error
-import java.lang.Exception
+import com.shengbojia.notes.data.Result.Success
 
 /**
  * Fake for [Repository]. Didn't use a mock since there is some functionality mocks and stubs can't provide.

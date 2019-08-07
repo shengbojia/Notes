@@ -4,10 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.shengbojia.notes.data.db.AppDatabase
-import com.shengbojia.notes.data.Result.Success
-import com.google.common.truth.Truth.*
+import com.google.common.truth.Truth.assertThat
 import com.shengbojia.notes.MainCoroutineRule
+import com.shengbojia.notes.data.Result.Success
+import com.shengbojia.notes.data.db.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

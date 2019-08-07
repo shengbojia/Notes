@@ -1,18 +1,17 @@
 package com.shengbojia.notes.data.db
 
 import androidx.room.Room
-import org.junit.runner.RunWith
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.google.common.truth.Truth.*
+import com.google.common.truth.Truth.assertThat
 import com.shengbojia.notes.data.Note
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
