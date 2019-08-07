@@ -149,7 +149,7 @@ class NoteListFragmentTest {
         openActionBarOverflowOrOptionsMenu(getApplicationContext())
         onView(withText(R.string.action_deleteAll)).perform(click())
 
-        // TODO: it does appear that recyclerview is maintaining the views until a fragment change
+        // TODO: it does appear that recyclerview is maintaining the views until a fragment stack pop
         // very clunky way trying to pop the fragment stack and see if the recyclerview refreshes
         repository.insertNoteBlocking(Note("refresh", "the screen"))
         openActionBarOverflowOrOptionsMenu(getApplicationContext())
