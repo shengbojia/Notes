@@ -28,7 +28,7 @@
 
                 <EditText
                         android:id="@+id/et_edit_title"
-                        android:text="@{viewModel.title}"
+                        android:text="@={viewModel.title}"
                         android:hint="@string/all_title"
                         tools:text="@string/all_title"
                         android:inputType="text"
@@ -41,7 +41,7 @@
 
                 <EditText
                         android:id="@+id/et_edit_desc"
-                        android:text="@{viewModel.description}"
+                        android:text="@={viewModel.description}"
                         android:hint="@string/all_description"
                         app:backgroundTint="@color/colorDarkerGray"
                         tools:text="Howdy\npartner"
