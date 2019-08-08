@@ -21,6 +21,7 @@ import com.shengbojia.notes.ServiceLocator
 import com.shengbojia.notes.data.FakeRepository
 import com.shengbojia.notes.data.Repository
 import com.shengbojia.notes.data.Result
+import com.shengbojia.notes.utility.ADD_EDIT_RESULT_OK
 import com.shengbojia.notes.utility.getAllNotesBlocking
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -29,6 +30,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import org.robolectric.annotation.LooperMode
 import org.robolectric.annotation.TextLayoutMode
 
@@ -91,6 +93,25 @@ class AddEditNoteFragmentTest {
         assertThat(notes).hasSize(1)
         assertThat(notes[0].title).isEqualTo(title)
         assertThat(notes[0].description).isEqualTo(desc)
+    }
+
+    @Test
+    fun validNoteSaved_navigatesToNoteList() {
+        // Given - starting on add fragment in isolation
+        val navController = mock(NavController::class.java)
+        setupFragment(navController)
+
+        // When saving a valid note with nonempty title and description
+        val title = "title"
+        val desc = "desc"
+        onView(withId(R.id.et_edit_title)).perform(replaceText(title))
+        onView(withId(R.id.et_edit_desc)).perform(replaceText(desc))
+        onView(withId(R.id.fab_addEdit_save)).perform(click())
+
+        // Then verify navigation back to note list screen
+        verify(navController).navigate(
+            AddEditNoteFragmentDirections.actionAddEditNoteFragmentToNoteListFragment(ADD_EDIT_RESULT_OK)
+        )
     }
 
     /**
