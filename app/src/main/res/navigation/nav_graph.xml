@@ -51,7 +51,7 @@
     <fragment
             android:id="@+id/noteDetailFragment"
             android:name="com.shengbojia.notes.notedetail.NoteDetailFragment"
-            android:label="note_detail_fragment"
+            android:label="View note"
             tools:layout="@layout/fragment_note_detail">
 
         <argument
