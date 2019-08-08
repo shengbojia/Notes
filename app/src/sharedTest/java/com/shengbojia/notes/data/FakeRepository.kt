@@ -10,8 +10,8 @@ import com.shengbojia.notes.data.Result.Success
  */
 class FakeRepository : Repository {
 
-    @VisibleForTesting
-    val fakeData = LinkedHashMap<String, Note>()
+
+    private val fakeData = LinkedHashMap<String, Note>()
 
     private var shouldReturnError = false
 

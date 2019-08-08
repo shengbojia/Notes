@@ -8,6 +8,8 @@ import com.shengbojia.notes.R
 import com.shengbojia.notes.assertSnackbarMessage
 import com.shengbojia.notes.data.FakeRepository
 import com.shengbojia.notes.data.Note
+import com.shengbojia.notes.data.Result
+import com.shengbojia.notes.utility.getAllNotesBlocking
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
@@ -101,7 +103,8 @@ class AddEditViewModelTest {
         }
         viewModel.saveNote()
 
-        assertThat(fakeRepository.fakeData).hasSize(1)
+        val notes = (fakeRepository.getAllNotesBlocking() as Result.Success).data
+        assertThat(notes).hasSize(1)
         assertThat(getValue(viewModel.noteUpdatedEvent).peekContent()).isEqualTo(Unit)
     }
 
@@ -138,11 +141,12 @@ class AddEditViewModelTest {
         viewModel.saveNote()
 
         // then the note  should be updated in repo
-        assertThat(fakeRepository.fakeData).hasSize(1)
+        val notes = (fakeRepository.getAllNotesBlocking() as Result.Success).data
+        assertThat(notes).hasSize(1)
         assertThat(getValue(viewModel.noteUpdatedEvent).peekContent()).isEqualTo(Unit)
 
-        assertThat(fakeRepository.fakeData[note.id]?.title).isEqualTo(newTitle)
-        assertThat(fakeRepository.fakeData[note.id]?.description).isEqualTo(newDesc)
+        assertThat(notes[0].title).isEqualTo(newTitle)
+        assertThat(notes[0].description).isEqualTo(newDesc)
     }
 
     @Test
