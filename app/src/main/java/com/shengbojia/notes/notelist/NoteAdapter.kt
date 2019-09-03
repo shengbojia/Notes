@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.shengbojia.notes.data.Note
 import com.shengbojia.notes.databinding.ItemNotesBinding
+import timber.log.Timber
 
 /**
  * Adapter for the [RecyclerView] in [MainActivity]
@@ -51,7 +52,7 @@ class NoteAdapter(
             }
 
             override fun onNoteLongClicked(note: Note): Boolean {
-                Log.d(TAG, "Long presser listener")
+                Timber.d("Long presser listener")
                 return true
             }
         }
@@ -73,9 +74,6 @@ class NoteAdapter(
         }
     }
 
-    companion object {
-        private const val TAG = "AdapterNote"
-    }
 }
 
 /**
