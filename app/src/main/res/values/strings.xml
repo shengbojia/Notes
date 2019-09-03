@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">Notes</string>
 
+    <!-- Labels for different screens -->
     <string name="fragment_title_addNote">Add note</string>
     <string name="fragment_title_editNote">Edit note</string>
+    <string name="fragment_title_noteDetail">View note</string>
 
     <!-- The labels for the three fields that users can alter -->
     <string name="all_title">Title</string>
     <string name="all_description">Description</string>
     <string name="all_priority">Priority</string>
-
-    <string name="action_deleteAll">Delete All</string>
 
     <string name="prepopulate_title_1">Capture what\'s on your mind, on the go</string>
     <string name="prepopulate_title_2">Title 2</string>
@@ -20,13 +20,18 @@
     <string name="dialog_positive">Yes</string>
     <string name="dialog_cancel">I\'ve changed my mind</string>
 
+    <!-- action bar options -->
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
+    <string name="action_deleteAll">Delete All</string>
     <string name="contextAction_delete">Delete selected</string>
+    <string name="action_refresh">Refresh</string>
 
+    <!-- Snackbar messages -->
     <string name="snackbar_error_loading">Error while loading notes.</string>
     <string name="snackbar_error_delete">Error while deleting.</string>
     <string name="snackbar_error_insert">Something went wrong while saving.</string>
+    <string name="snackbar_error_noteMissing">Note not found.</string>
     
     <string name="snackbar_message_cannotBeEmpty">Requires a title and description!</string>
 
@@ -34,8 +39,7 @@
     <string name="snackbar_success_saved">Note saved!</string>
     <string name="snackbar_success_delete">Note deleted.</string>
 
+    <!-- messages to display on screen when no data -->
     <string name="noteList_emptyNotesMsg">You have no notes.</string>
     <string name="noteDetail_noData">No data</string>
-    <string name="action_refresh">Refresh</string>
-    <string name="snackbar_error_noteMissing">Note not found.</string>
 </resources>

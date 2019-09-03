@@ -12,6 +12,7 @@ import com.shengbojia.notes.R
 import com.shengbojia.notes.databinding.FragmentNoteListBinding
 import com.shengbojia.notes.utility.obtainViewModel
 import com.shengbojia.notes.utility.setupSnackbar
+import timber.log.Timber
 
 /**
  * [NoteListFragment] displays saved notes in a [RecyclerView], and has a [FloatingActionButton] for
@@ -73,7 +74,7 @@ class NoteListFragment : Fragment() {
             adapter = NoteAdapter(viewModel)
             binding.recyclerViewNoteList.adapter = adapter
         } else {
-            Log.d(TAG, "Viewmodel null when trying to setup adapter")
+            Timber.d("Viewmodel null when trying to setup adapter")
         }
     }
 
@@ -110,7 +111,7 @@ class NoteListFragment : Fragment() {
         when (item.itemId) {
             R.id.action_deleteAll -> {
                 binding.viewModel?.deleteAllNotes()
-                Log.d(TAG, "Deleted all")
+                Timber.d( "Deleted all")
                 true
             }
             R.id.action_refresh -> {
@@ -119,9 +120,5 @@ class NoteListFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-
-    companion object {
-        private const val TAG = "FragNoteList"
-    }
 
 }

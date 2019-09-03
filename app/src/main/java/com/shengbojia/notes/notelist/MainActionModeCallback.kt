@@ -41,7 +41,7 @@ class MainActionModeCallback(
     override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.contextAction_delete -> {
-                Log.d(TAG, "pressed delete")
+                Timber.d("pressed delete")
 
                 // TODO: Dialog for confirmation
                 viewModel.deleteNotes()
@@ -74,11 +74,6 @@ class MainActionModeCallback(
     private fun resetDelete() {
         viewModel.notesToDelete.clear()
 
-    }
-
-
-    companion object {
-        private const val TAG = "CallbackActionMode"
     }
 }
 

@@ -1,7 +1,6 @@
 package com.shengbojia.notes.worker
 
 import android.content.Context
-import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -9,6 +8,7 @@ import com.shengbojia.notes.data.db.AppDatabase
 import com.shengbojia.notes.data.Note
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class PopulateDatabaseWorker(
     context: Context,
@@ -41,13 +41,9 @@ class PopulateDatabaseWorker(
 
             } catch (e: Exception) {
 
-                Log.e(TAG, "Error trying to prepopulate database")
+                Timber.e("Error trying to prepopulate database")
                 Result.failure()
 
             }
         }
-
-    companion object {
-        private const val TAG = "WorkerPopulate"
-    }
 }
